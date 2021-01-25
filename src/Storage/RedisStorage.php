@@ -14,7 +14,7 @@ namespace Birke\Rememberme\Storage;
 class RedisStorage implements StorageInterface
 {
     /**
-     * @var Predis\Client
+     * @var \Predis\Client
      */
     protected $client;
 
@@ -25,10 +25,10 @@ class RedisStorage implements StorageInterface
 
 
     /**
-     * @param Predis\Client $client
+     * @param \Predis\Client $client
      * @param string        $keyPrefix
      */
-    public function __construct(Predis\Client $client, $keyPrefix = 'rememberme')
+    public function __construct(\Predis\Client $client, $keyPrefix = 'rememberme')
     {
         $this->client = $client;
         $this->keyPrefix = $keyPrefix;
