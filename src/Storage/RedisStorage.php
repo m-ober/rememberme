@@ -11,7 +11,7 @@ namespace Birke\Rememberme\Storage;
  *
  * @author Michaël Thieulin
  */
-class Redis implements StorageInterface
+class RedisStorage implements StorageInterface
 {
     /**
      * @var Predis\Client
