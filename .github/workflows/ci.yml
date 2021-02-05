@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        php-versions: ['7.3', '7.4']
+        php-versions: ['7.3', '7.4', '8.0']
     name: Test on PHP ${{ matrix.php-versions }}
     steps:
     - name: Checkout
@@ -17,6 +17,6 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
     - name: Install dependencies
-      run: composer install
+      run: composer install --ignore-platform-reqs
     - name: Run tests
       run: composer ci
