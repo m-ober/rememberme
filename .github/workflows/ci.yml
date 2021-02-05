@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  run:    
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        php-versions: ['7.3', '7.4']
+    name: Test on PHP ${{ matrix.php-versions }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+    - name: Install dependencies
+      run: composer install
+    - name: Run tests
+      run: composer ci
