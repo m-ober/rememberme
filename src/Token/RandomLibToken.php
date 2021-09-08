@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Token;
+namespace mober\Rememberme\Token;
 
 use RandomLib\Factory;
 use RandomLib\Generator;

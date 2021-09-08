@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Cookie;
+namespace mober\Rememberme\Cookie;
 
 /**
  * Wrapper around setcookie function and $_COOKIE global variable

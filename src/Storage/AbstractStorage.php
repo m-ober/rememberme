@@ -3,7 +3,7 @@
 /**
  * @license MIT
  */
-namespace Birke\Rememberme\Storage;
+namespace mober\Rememberme\Storage;
 
 /**
  * This abstract class is for storing the credential/token/persistentToken triplets

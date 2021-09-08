@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-use Birke\Rememberme\Token\RandomLibToken;
+use mober\Rememberme\Token\RandomLibToken;
 use PHPUnit\Framework\TestCase;
 
 class RandomLibTokenTest extends TestCase

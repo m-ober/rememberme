@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme;
+namespace mober\Rememberme;
 
 /**
  * Represents the current state of the "Remember me" login.

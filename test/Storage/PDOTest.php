@@ -2,8 +2,8 @@
 /*
  */
 
-use Birke\Rememberme\Storage\PDOStorage;
-use Birke\Rememberme\Storage\AbstractStorage;
+use mober\Rememberme\Storage\PDOStorage;
+use mober\Rememberme\Storage\AbstractStorage;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,7 +31,7 @@ CRDB;
 
   /**
    *
-   * @var Birke\Rememberme\Storage\PDOStorage
+   * @var mober\Rememberme\Storage\PDOStorage
    */
     protected $storage;
 

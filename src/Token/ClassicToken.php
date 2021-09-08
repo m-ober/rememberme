@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Token;
+namespace mober\Rememberme\Token;
 
 /**
  * Generate an insecure token with the uniqid function.

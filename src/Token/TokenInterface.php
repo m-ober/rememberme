@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Token;
+namespace mober\Rememberme\Token;
 
 /**
  * Interface for creating random tokens

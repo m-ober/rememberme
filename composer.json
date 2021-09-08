@@ -1,5 +1,5 @@
 {
-    "name": "birke/rememberme",
+    "name": "mober/rememberme",
     "version": "4.0.1",
     "description": "Secure \"Remember Me\" functionality",
     "keywords": [ "cookie", "remember", "security"],
@@ -9,11 +9,15 @@
         {
             "name": "Gabriel Birke",
             "email": "gb@birke-software.de"
+        },
+        {
+            "name": "Micha Ober",
+            "email": "php@ober-mail.de"
         }
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {"Birke\\Rememberme\\": "src/"}
+        "psr-4": {"mober\\Rememberme\\": "src/"}
     },
     "require": {
 		"php": "^7.4 || ^8.0"

@@ -1,7 +1,7 @@
 <?php
 
-use Birke\Rememberme\Authenticator;
-use Birke\Rememberme\Storage\FileStorage;
+use mober\Rememberme\Authenticator;
+use mober\Rememberme\Storage\FileStorage;
 
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/util.php';
@@ -20,7 +20,7 @@ if (!is_writable($storagePath) || !is_dir($storagePath)) {
 $storage = new FileStorage($storagePath);
 $rememberMe = new Authenticator($storage);
 
-$router = new Birke\Rememberme\Example\Router();
+$router = new mober\Rememberme\Example\Router();
 
 $router->beforeEachRoute(function () use ($rememberMe) {
 

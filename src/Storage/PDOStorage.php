@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Storage;
+namespace mober\Rememberme\Storage;
 
 use PDO;
 use PDOException;

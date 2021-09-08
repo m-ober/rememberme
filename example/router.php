@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Example;
+namespace mober\Rememberme\Example;
 
 /**
  * Inspired by https://github.com/moagrius/RegexRouter

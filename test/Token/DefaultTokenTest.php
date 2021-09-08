@@ -4,9 +4,9 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Test;
+namespace mober\Rememberme\Test;
 
-use Birke\Rememberme\Token\DefaultToken;
+use mober\Rememberme\Token\DefaultToken;
 use PHPUnit\Framework\TestCase;
 
 class DefaultTokenTest extends TestCase

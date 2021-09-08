@@ -4,12 +4,12 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme;
+namespace mober\Rememberme;
 
-use Birke\Rememberme\Cookie\CookieInterface;
-use Birke\Rememberme\Cookie\PHPCookie;
-use Birke\Rememberme\Token\DefaultToken;
-use Birke\Rememberme\Token\TokenInterface;
+use mober\Rememberme\Cookie\CookieInterface;
+use mober\Rememberme\Cookie\PHPCookie;
+use mober\Rememberme\Token\DefaultToken;
+use mober\Rememberme\Token\TokenInterface;
 use Exception;
 
 /**

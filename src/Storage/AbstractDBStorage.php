@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme\Storage;
+namespace mober\Rememberme\Storage;
 
 /**
  * This abstract class contains properties with getters and setters for all

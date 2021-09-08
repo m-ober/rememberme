@@ -3,7 +3,7 @@
 /**
  * @license MIT
  */
-namespace Birke\Rememberme\Token;
+namespace mober\Rememberme\Token;
 
 /**
  * Common utility class for tokens

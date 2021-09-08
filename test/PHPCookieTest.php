@@ -1,7 +1,7 @@
 <?php
 
 // Mock PHP function
-namespace Birke\Rememberme\Cookie {
+namespace mober\Rememberme\Cookie {
     function setcookie($name, $value, $options)
     {
         return true;
@@ -10,7 +10,7 @@ namespace Birke\Rememberme\Cookie {
 
 namespace {
 
-    use Birke\Rememberme\Cookie\PHPCookie;
+    use mober\Rememberme\Cookie\PHPCookie;
     use PHPUnit\Framework\TestCase;
 
     class PHPCookieTest extends TestCase

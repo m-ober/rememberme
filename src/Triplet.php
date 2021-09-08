@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-namespace Birke\Rememberme;
+namespace mober\Rememberme;
 
 /**
  * Domain object for credential, persistent and transient token
