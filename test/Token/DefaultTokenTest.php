@@ -33,6 +33,6 @@ class DefaultTokenTest extends TestCase
     public function testTokenLengthIsExactWhenUsingPlainFormat()
     {
         $token = new DefaultToken(32, DefaultToken::FORMAT_PLAIN);
-        $this->assertEquals(32, strlen($token->createToken()));
+        $this->assertSame(32, strlen($token->createToken()));
     }
 }

@@ -102,7 +102,8 @@ CRDB;
     public function testCleanAllTripletsRemovesAllEntriesWithMatchingCredentialsFromDatabase()
     {
         $this->insertFixtures();
-        $this->pdo->exec("INSERT INTO tokens VALUES ('{$this->userid}', 'dummy', 'dummy', '".date("Y-m-d H:i:s", time())."')");
+        $now = date("Y-m-d");
+        $this->pdo->exec("INSERT INTO tokens VALUES ('{$this->userid}', 'dummy', 'dummy', {$now})");
         $this->storage->cleanAllTriplets($this->userid);
         $this->assertEquals(0, $this->pdo->query("SELECT COUNT(*) FROM tokens")->fetchColumn());
     }
