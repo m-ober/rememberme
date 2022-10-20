@@ -23,11 +23,6 @@ class Authenticator
     protected $cookie;
 
     /**
-     * @var Storage\AbstractStorage
-     */
-    protected $storage;
-
-    /**
      * @var Token\TokenInterface
      */
     protected $tokenGenerator;
@@ -66,7 +61,7 @@ class Authenticator
      * @param Cookie\CookieInterface  $cookie
      */
     public function __construct(
-        Storage\AbstractStorage $storage,
+        protected Storage\AbstractStorage $storage,
         TokenInterface $tokenGenerator = null,
         Cookie\CookieInterface $cookie = null,
     ) {
@@ -76,7 +71,6 @@ class Authenticator
         if (is_null($cookie)) {
             $cookie = new PHPCookie();
         }
-        $this->storage = $storage;
         $this->cookie = $cookie;
         $this->tokenGenerator = $tokenGenerator;
     }

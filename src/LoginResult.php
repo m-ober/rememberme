@@ -11,11 +11,6 @@ namespace mober\Rememberme;
  */
 class LoginResult
 {
-    private $cookieExists;
-    private $tripleWasFound;
-    private $tripleWasValid;
-    private $credential;
-
     /**
      * @param bool  $cookieExists
      * @param bool  $tripleWasFound
@@ -23,15 +18,11 @@ class LoginResult
      * @param mixed $credential
      */
     private function __construct(
-        $cookieExists = false,
-        $tripleWasFound = false,
-        $tripleWasValid = false,
-        $credential = null
+        private bool $cookieExists = false,
+        private bool $tripleWasFound = false,
+        private bool $tripleWasValid = false,
+        private mixed $credential = null,
     ) {
-        $this->cookieExists = $cookieExists;
-        $this->tripleWasFound = $tripleWasFound;
-        $this->tripleWasValid = $tripleWasValid;
-        $this->credential = $credential;
     }
 
     /**

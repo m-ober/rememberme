@@ -14,24 +14,11 @@ namespace mober\Rememberme\Storage;
 class RedisStorage extends AbstractStorage
 {
     /**
-     * @var \Predis\Client
-     */
-    protected $client;
-
-    /**
-     * @var string
-     */
-    protected $keyPrefix = 'rememberme';
-
-
-    /**
      * @param \Predis\Client $client
      * @param string         $keyPrefix
      */
-    public function __construct(\Predis\Client $client, $keyPrefix = 'rememberme')
+    public function __construct(protected \Predis\Client $client, protected string $keyPrefix = 'rememberme')
     {
-        $this->client = $client;
-        $this->keyPrefix = $keyPrefix;
     }
 
     /**

@@ -12,23 +12,11 @@ namespace mober\Rememberme\Storage;
 class FileStorage extends AbstractStorage
 {
     /**
-     * @var string
-     */
-    protected $path = "";
-
-    /**
-     * @var string
-     */
-    protected $suffix = ".txt";
-
-    /**
      * @param string $path
      * @param string $suffix
      */
-    public function __construct($path = "", $suffix = ".txt")
+    public function __construct(protected string $path = "", protected string $suffix = ".txt")
     {
-        $this->path = $path;
-        $this->suffix = $suffix;
     }
 
     /**

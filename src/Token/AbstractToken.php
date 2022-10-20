@@ -17,20 +17,15 @@ abstract class AbstractToken implements TokenInterface
     public const FORMAT_PLAIN  = 'plain';
     public const FORMAT_BASE64 = 'base64'; // space needed * 1.6
 
-    protected $tokenBytes = 16;
-    protected $tokenFormat = self::FORMAT_HEX;
-
     /**
      * @param int    $tokenBytes  How many bytes the token shall contain
      * @param string $tokenFormat How the bytes shall be formatted. Can increase the string returned
      */
-    public function __construct($tokenBytes = 16, $tokenFormat = self::FORMAT_HEX)
+    public function __construct(protected int $tokenBytes = 16, protected string $tokenFormat = self::FORMAT_HEX)
     {
         if (!in_array($tokenFormat, [self::FORMAT_HEX, self::FORMAT_PLAIN, self::FORMAT_BASE64])) {
             throw new \InvalidArgumentException("Invalid token format");
         }
-        $this->tokenBytes = $tokenBytes;
-        $this->tokenFormat = $tokenFormat;
     }
 
     /**

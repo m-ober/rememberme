@@ -11,20 +11,16 @@ namespace mober\Rememberme;
  */
 class Triplet
 {
-    private $credential;
-    private $persistentToken;
-    private $oneTimeToken;
-
     /**
-     * @param string $credential
+     * @param mixed $credential
      * @param string $oneTimeToken
      * @param string $persistentToken
      */
-    public function __construct($credential = '', $oneTimeToken = '', $persistentToken = '')
-    {
-        $this->credential = $credential;
-        $this->persistentToken = $persistentToken;
-        $this->oneTimeToken = $oneTimeToken;
+    public function __construct(
+        private mixed $credential = '',
+        private string $oneTimeToken = '',
+        private string $persistentToken = '',
+    ) {
     }
 
     /**

@@ -12,69 +12,24 @@ namespace mober\Rememberme\Cookie;
 class PHPCookie implements CookieInterface
 {
     /**
-     * Name of the cookie
-     * @var string
-     */
-    protected $name = "REMEMBERME";
-
-    /**
-     * Number of seconds in the future the cookie and storage will expire (defaults to 1 week)
-     * @var int
-     */
-    protected $expireTime = 604800;
-
-    /**
-     * Path where the cookie is valid
-     * @var string
-     */
-    protected $path = "/";
-
-    /**
-     * Cookie domain
-     * @var string
-     */
-    protected $domain = "";
-
-    /**
-     * @var bool
-     */
-    protected $secure = true;
-
-    /**
-     * @var bool
-     */
-    protected $httpOnly = true;
-
-    /**
-     * @var string
-     */
-    protected $sameSite = "Lax";
-
-    /**
      * PHPCookie constructor.
-     * @param string $name
-     * @param int    $expireTime
-     * @param string $path
-     * @param string $domain
-     * @param bool   $secure
-     * @param bool   $httpOnly
-     * @param string $sameSite   'None', 'Lax', or 'Strict'
+     * @param string $name Name of the cookie
+     * @param int $expireTime Number of seconds in the future the cookie and storage will expire (defaults to 1 week)
+     * @param string $path Path where the cookie is valid
+     * @param string $domain Cookie domain
+     * @param bool $secure
+     * @param bool $httpOnly
+     * @param string $sameSite 'None', 'Lax', or 'Strict'
      */
     public function __construct(
-        $name = "REMEMBERME",
-        $expireTime = 604800,
-        $path = "/",
-        $domain = "",
-        $secure = false,
-        $httpOnly = true,
-        $sameSite = "Lax"
+        protected string $name = "REMEMBERME",
+        protected int $expireTime = 604800,
+        protected string $path = "/",
+        protected string $domain = "",
+        protected bool $secure = false,
+        protected bool $httpOnly = true,
+        protected string $sameSite = "Lax",
     ) {
-        $this->name = $name;
-        $this->expireTime = $expireTime;
-        $this->path = $path;
-        $this->domain = $domain;
-        $this->secure = $secure;
-        $this->httpOnly = $httpOnly;
         $this->setSameSite($sameSite);
 
         if ($this->sameSite === "None" && !$this->secure) {
@@ -108,7 +63,7 @@ class PHPCookie implements CookieInterface
      */
     public function getValue()
     {
-        return isset($_COOKIE[$this->name]) ? $_COOKIE[$this->name] : "";
+        return $_COOKIE[$this->name] ?? "";
     }
 
     /**
