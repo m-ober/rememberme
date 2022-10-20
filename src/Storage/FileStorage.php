@@ -109,7 +109,7 @@ class FileStorage extends AbstractStorage
      */
     public function cleanAllTriplets($credential)
     {
-        foreach (glob($this->path.DIRECTORY_SEPARATOR.$credential.".*".$this->suffix) as $file) {
+        foreach (glob($this->path . DIRECTORY_SEPARATOR . $credential . ".*" . $this->suffix) as $file) {
             unlink($file);
         }
     }
@@ -123,7 +123,7 @@ class FileStorage extends AbstractStorage
      */
     public function cleanExpiredTokens($expiryTime)
     {
-        foreach (glob($this->path.DIRECTORY_SEPARATOR."*".$this->suffix) as $file) {
+        foreach (glob($this->path . DIRECTORY_SEPARATOR . "*" . $this->suffix) as $file) {
             if (filemtime($file) < $expiryTime) {
                 unlink($file);
             }
@@ -138,6 +138,6 @@ class FileStorage extends AbstractStorage
      */
     protected function getFilename($credential, $persistentToken)
     {
-        return $this->path.DIRECTORY_SEPARATOR.$credential.".".$persistentToken.$this->suffix;
+        return $this->path . DIRECTORY_SEPARATOR . $credential . "." . $persistentToken . $this->suffix;
     }
 }

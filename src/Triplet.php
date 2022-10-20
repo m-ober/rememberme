@@ -82,7 +82,7 @@ class Triplet
      */
     public function getSaltedPersistentToken($salt)
     {
-        return $this->getPersistentToken().$salt;
+        return $this->getPersistentToken() . $salt;
     }
 
     /**
@@ -92,7 +92,7 @@ class Triplet
      */
     public function getSaltedOneTimeToken($salt)
     {
-        return $this->getOneTimeToken().$salt;
+        return $this->getOneTimeToken() . $salt;
     }
 
     /**

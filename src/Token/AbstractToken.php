@@ -3,6 +3,7 @@
 /**
  * @license MIT
  */
+
 namespace mober\Rememberme\Token;
 
 /**
@@ -12,10 +13,9 @@ namespace mober\Rememberme\Token;
  */
 abstract class AbstractToken implements TokenInterface
 {
-
-    const FORMAT_HEX    = 'hex'; // doubles the space needed
-    const FORMAT_PLAIN  = 'plain';
-    const FORMAT_BASE64 = 'base64'; // space needed * 1.6
+    public const FORMAT_HEX    = 'hex'; // doubles the space needed
+    public const FORMAT_PLAIN  = 'plain';
+    public const FORMAT_BASE64 = 'base64'; // space needed * 1.6
 
     protected $tokenBytes = 16;
     protected $tokenFormat = self::FORMAT_HEX;

@@ -1,4 +1,5 @@
 <?php
+
 // Demo of how the page could look when you display the info of stolen cookies
 
 ?>

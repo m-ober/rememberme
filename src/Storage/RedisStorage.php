@@ -116,7 +116,7 @@ class RedisStorage extends AbstractStorage
      */
     public function cleanAllTriplets($credential)
     {
-        foreach ($this->client->keys($this->keyPrefix.':'.$credential.':*') as $key) {
+        foreach ($this->client->keys($this->keyPrefix . ':' . $credential . ':*') as $key) {
             $this->client->del($key);
         }
     }
@@ -141,6 +141,6 @@ class RedisStorage extends AbstractStorage
      */
     protected function getKeyname($credential, $persistentToken)
     {
-        return $this->keyPrefix.':'.$credential.':'.$persistentToken;
+        return $this->keyPrefix . ':' . $credential . ':' . $persistentToken;
     }
 }

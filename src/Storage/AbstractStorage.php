@@ -3,6 +3,7 @@
 /**
  * @license MIT
  */
+
 namespace mober\Rememberme\Storage;
 
 /**
@@ -13,9 +14,9 @@ namespace mober\Rememberme\Storage;
  */
 abstract class AbstractStorage
 {
-    const TRIPLET_FOUND = 1;
-    const TRIPLET_NOT_FOUND = 0;
-    const TRIPLET_INVALID = -1;
+    public const TRIPLET_FOUND = 1;
+    public const TRIPLET_NOT_FOUND = 0;
+    public const TRIPLET_INVALID = -1;
 
     /**
      * @var string

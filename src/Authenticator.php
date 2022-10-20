@@ -17,7 +17,6 @@ use Exception;
  */
 class Authenticator
 {
-
     /**
      * @var Cookie\CookieInterface
      */
@@ -66,8 +65,11 @@ class Authenticator
      * @param TokenInterface          $tokenGenerator
      * @param Cookie\CookieInterface  $cookie
      */
-    public function __construct(Storage\AbstractStorage $storage, TokenInterface $tokenGenerator = null, Cookie\CookieInterface $cookie = null)
-    {
+    public function __construct(
+        Storage\AbstractStorage $storage,
+        TokenInterface $tokenGenerator = null,
+        Cookie\CookieInterface $cookie = null,
+    ) {
         if (is_null($tokenGenerator)) {
             $tokenGenerator = new DefaultToken();
         }
@@ -111,7 +113,11 @@ class Authenticator
         switch ($tripletLookupResult) {
             case Storage\AbstractStorage::TRIPLET_FOUND:
                 $expire = time() + $this->expireTime;
-                $newTriplet = new Triplet($triplet->getCredential(), $this->tokenGenerator->createToken(), $triplet->getPersistentToken());
+                $newTriplet = new Triplet(
+                    $triplet->getCredential(),
+                    $this->tokenGenerator->createToken(),
+                    $triplet->getPersistentToken()
+                );
                 $this->storage->replaceTriplet(
                     $newTriplet->getCredential(),
                     $newTriplet->getSaltedOneTimeToken($this->salt),
@@ -149,7 +155,7 @@ class Authenticator
 
         $expire = time() + $this->expireTime;
 
-        $this->storage->storeTriplet($credential, $newToken.$this->salt, $newPersistentToken.$this->salt, $expire);
+        $this->storage->storeTriplet($credential, $newToken . $this->salt, $newPersistentToken . $this->salt, $expire);
         $this->cookie->setValue(implode("|", array($credential, $newToken, $newPersistentToken)));
 
         return $this;

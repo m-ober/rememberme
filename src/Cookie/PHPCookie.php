@@ -11,7 +11,6 @@ namespace mober\Rememberme\Cookie;
  */
 class PHPCookie implements CookieInterface
 {
-
     /**
      * Name of the cookie
      * @var string
@@ -61,8 +60,15 @@ class PHPCookie implements CookieInterface
      * @param bool   $httpOnly
      * @param string $sameSite   'None', 'Lax', or 'Strict'
      */
-    public function __construct($name = "REMEMBERME", $expireTime = 604800, $path = "/", $domain = "", $secure = false, $httpOnly = true, $sameSite = "Lax")
-    {
+    public function __construct(
+        $name = "REMEMBERME",
+        $expireTime = 604800,
+        $path = "/",
+        $domain = "",
+        $secure = false,
+        $httpOnly = true,
+        $sameSite = "Lax"
+    ) {
         $this->name = $name;
         $this->expireTime = $expireTime;
         $this->path = $path;

@@ -11,7 +11,6 @@ namespace mober\Rememberme\Cookie;
  */
 interface CookieInterface
 {
-
     /**
      * Get the value from the cookie
      * @return string

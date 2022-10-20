@@ -22,8 +22,12 @@ class LoginResult
      * @param bool  $tripleWasValid
      * @param mixed $credential
      */
-    private function __construct($cookieExists = false, $tripleWasFound = false, $tripleWasValid = false, $credential = null)
-    {
+    private function __construct(
+        $cookieExists = false,
+        $tripleWasFound = false,
+        $tripleWasValid = false,
+        $credential = null
+    ) {
         $this->cookieExists = $cookieExists;
         $this->tripleWasFound = $tripleWasFound;
         $this->tripleWasValid = $tripleWasValid;
@@ -39,8 +43,6 @@ class LoginResult
      */
     public static function newSuccessResult($credential)
     {
-        // See https://github.com/djoos/Symfony2-coding-standard/issues/54
-        // @codingStandardsIgnoreLine
         return new self(true, true, true, $credential);
     }
 

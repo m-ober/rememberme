@@ -3,17 +3,17 @@
 use mober\Rememberme\Authenticator;
 use mober\Rememberme\Storage\FileStorage;
 
-require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/util.php';
-require_once __DIR__.'/router.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/util.php';
+require_once __DIR__ . '/router.php';
 
 session_start();
 
 // Initialize RememberMe Library with file storage
-$storagePath = dirname(__FILE__)."/tokens";
+$storagePath = dirname(__FILE__) . "/tokens";
 if (!is_writable($storagePath) || !is_dir($storagePath)) {
     die(
-        "'$storagePath' does not exist or is not writable by the web server.\n".
+        "'$storagePath' does not exist or is not writable by the web server.\n" .
         "To run the example, please create the directory and give it the correct permissions."
     );
 }

@@ -50,7 +50,7 @@ abstract class AbstractDBStorage extends AbstractStorage
     public function __construct($options)
     {
         foreach ($options as $prop => $value) {
-            $setter = "set".ucfirst($prop);
+            $setter = "set" . ucfirst($prop);
             if (method_exists($this, $setter)) {
                 $this->$setter($value);
             }

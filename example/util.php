@@ -8,7 +8,7 @@
  */
 function render_template($name, $msg = "")
 {
-    $fn = __DIR__.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR.$name.".php";
+    $fn = __DIR__ . DIRECTORY_SEPARATOR . "templates" . DIRECTORY_SEPARATOR . $name . ".php";
     if (file_exists($fn)) {
         ob_start();
         include $fn;
@@ -16,5 +16,5 @@ function render_template($name, $msg = "")
     } else {
         $content = "Template $fn not found";
     }
-    include __DIR__.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."layout.php";
+    include __DIR__ . DIRECTORY_SEPARATOR . "templates" . DIRECTORY_SEPARATOR . "layout.php";
 }

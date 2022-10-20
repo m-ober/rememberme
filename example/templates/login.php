@@ -1,4 +1,6 @@
-<?php if (!empty($msg)) {
+<?php
+
+if (!empty($msg)) {
     echo "<p class='msg'>$msg</p>";
 } ?>
 

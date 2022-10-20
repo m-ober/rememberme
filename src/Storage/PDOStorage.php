@@ -19,7 +19,7 @@ class PDOStorage extends AbstractDBStorage
     /**
      * @var PDO
      */
-    protected $connection;
+    protected PDO $connection;
 
     /**
      * @param mixed  $credential
@@ -30,7 +30,7 @@ class PDOStorage extends AbstractDBStorage
      */
     public function findTriplet($credential, $token, $persistentToken)
     {
-        $sql = "SELECT $this->tokenColumn as token FROM {$this->tableName} WHERE {$this->credentialColumn} = ? ".
+        $sql = "SELECT $this->tokenColumn as token FROM {$this->tableName} WHERE {$this->credentialColumn} = ? " .
             "AND {$this->persistentTokenColumn} = ? AND {$this->expiresColumn} > ? LIMIT 1";
 
         $query = $this->connection->prepare($sql);
@@ -57,12 +57,14 @@ class PDOStorage extends AbstractDBStorage
      */
     public function storeTriplet($credential, $token, $persistentToken, $expire = 0)
     {
-        $sql = "INSERT INTO {$this->tableName}({$this->credentialColumn}, ".
-            "{$this->tokenColumn}, {$this->persistentTokenColumn}, ".
+        $sql = "INSERT INTO {$this->tableName}({$this->credentialColumn}, " .
+            "{$this->tokenColumn}, {$this->persistentTokenColumn}, " .
             "{$this->expiresColumn}) VALUES(?, ?, ?, ?)";
 
         $query = $this->connection->prepare($sql);
-        $query->execute(array($credential, $this->hash($token), $this->hash($persistentToken), date("Y-m-d H:i:s", $expire)));
+        $query->execute(
+            array($credential, $this->hash($token), $this->hash($persistentToken), date("Y-m-d H:i:s", $expire))
+        );
     }
 
     /**
@@ -71,7 +73,7 @@ class PDOStorage extends AbstractDBStorage
      */
     public function cleanTriplet($credential, $persistentToken)
     {
-        $sql = "DELETE FROM {$this->tableName} WHERE {$this->credentialColumn} = ? ".
+        $sql = "DELETE FROM {$this->tableName} WHERE {$this->credentialColumn} = ? " .
             "AND {$this->persistentTokenColumn} = ?";
 
         $query = $this->connection->prepare($sql);
