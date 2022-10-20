@@ -19,6 +19,6 @@ class ClassicToken implements TokenInterface
      */
     public function createToken(): string
     {
-        return md5(uniqid(mt_rand(), true));
+        return md5(uniqid((string) mt_rand(), true));
     }
 }
