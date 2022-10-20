@@ -35,13 +35,10 @@ abstract class AbstractToken implements TokenInterface
      */
     protected function formatBytes(string $token): string
     {
-        switch ($this->tokenFormat) {
-            case self::FORMAT_HEX:
-                return bin2hex($token);
-            case self::FORMAT_PLAIN:
-                return $token;
-            case self::FORMAT_BASE64:
-                return base64_encode($token);
-        }
+        return match ($this->tokenFormat) {
+            self::FORMAT_HEX => bin2hex($token),
+            self::FORMAT_BASE64 => base64_encode($token),
+            default => $token,
+        };
     }
 }
