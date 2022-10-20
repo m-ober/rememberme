@@ -21,7 +21,7 @@ abstract class AbstractStorage
     /**
      * @var string
      */
-    protected $hashAlgo = 'sha1';
+    protected string $hashAlgo = 'sha1';
 
     /**
      * Return Tri-state value constant
@@ -32,7 +32,7 @@ abstract class AbstractStorage
      *
      * @return int
      */
-    abstract public function findTriplet($credential, $token, $persistentToken);
+    abstract public function findTriplet(mixed $credential, string $token, string $persistentToken): int;
 
     /**
      * Store the new token for the credential and the persistent token.
@@ -42,18 +42,23 @@ abstract class AbstractStorage
      * @param mixed  $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire          Timestamp when this triplet will expire
+     * @param int $expire          Timestamp when this triplet will expire
      */
-    abstract public function storeTriplet($credential, $token, $persistentToken, $expire);
+    abstract public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void;
 
     /**
      * Replace current token after successful authentication
      * @param mixed  $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire
+     * @param int $expire
      */
-    abstract public function replaceTriplet($credential, $token, $persistentToken, $expire);
+    abstract public function replaceTriplet(
+        mixed $credential,
+        string $token,
+        string $persistentToken,
+        int $expire
+    ): void;
 
     /**
      * Remove one triplet of the user from the store
@@ -65,7 +70,7 @@ abstract class AbstractStorage
      *
      * @return void
      */
-    abstract public function cleanTriplet($credential, $persistentToken);
+    abstract public function cleanTriplet(mixed $credential, string $persistentToken): void;
 
     /**
      * Remove all triplets of a user, effectively logging him out on all machines
@@ -76,7 +81,7 @@ abstract class AbstractStorage
      *
      * @return void
      */
-    abstract public function cleanAllTriplets($credential);
+    abstract public function cleanAllTriplets(mixed $credential): void;
 
     /**
      * Remove all expired triplets of all users.
@@ -87,7 +92,7 @@ abstract class AbstractStorage
      *
      * @return void
      */
-    abstract public function cleanExpiredTokens($expiryTime);
+    abstract public function cleanExpiredTokens(int $expiryTime): void;
 
     /**
      * @return string
@@ -113,7 +118,7 @@ abstract class AbstractStorage
      *
      * @return string
      */
-    protected function hash($value)
+    protected function hash(string $value): string
     {
         return hash($this->hashAlgo, $value);
     }

@@ -42,7 +42,7 @@ class PHPCookie implements CookieInterface
      *
      * @param string $value
      */
-    public function setValue($value)
+    public function setValue(string $value): void
     {
         $expire = time() + $this->expireTime;
         $_COOKIE[$this->name] = $value;
@@ -61,7 +61,7 @@ class PHPCookie implements CookieInterface
      *
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $_COOKIE[$this->name] ?? "";
     }
@@ -69,7 +69,7 @@ class PHPCookie implements CookieInterface
     /**
      * @inheritdoc
      */
-    public function deleteCookie()
+    public function deleteCookie(): void
     {
         $expire = time() - $this->expireTime;
         unset($_COOKIE[$this->name]);
@@ -86,7 +86,7 @@ class PHPCookie implements CookieInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -94,7 +94,7 @@ class PHPCookie implements CookieInterface
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -102,7 +102,7 @@ class PHPCookie implements CookieInterface
     /**
      * @return int
      */
-    public function getExpireTime()
+    public function getExpireTime(): int
     {
         return $this->expireTime;
     }
@@ -110,7 +110,7 @@ class PHPCookie implements CookieInterface
     /**
      * @param int $expireTime
      */
-    public function setExpireTime($expireTime)
+    public function setExpireTime(int $expireTime): void
     {
         $this->expireTime = $expireTime;
     }
@@ -118,7 +118,7 @@ class PHPCookie implements CookieInterface
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -126,7 +126,7 @@ class PHPCookie implements CookieInterface
     /**
      * @param string $path
      */
-    public function setPath($path)
+    public function setPath(string $path): void
     {
         $this->path = $path;
     }
@@ -134,7 +134,7 @@ class PHPCookie implements CookieInterface
     /**
      * @return string
      */
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -142,7 +142,7 @@ class PHPCookie implements CookieInterface
     /**
      * @param string $domain
      */
-    public function setDomain($domain)
+    public function setDomain(string $domain): void
     {
         $this->domain = $domain;
     }
@@ -150,7 +150,7 @@ class PHPCookie implements CookieInterface
     /**
      * @return bool
      */
-    public function getSecure()
+    public function getSecure(): bool
     {
         return $this->secure;
     }
@@ -158,7 +158,7 @@ class PHPCookie implements CookieInterface
     /**
      * @param bool $secure
      */
-    public function setSecure($secure)
+    public function setSecure(bool $secure): void
     {
         $this->secure = $secure;
     }
@@ -166,7 +166,7 @@ class PHPCookie implements CookieInterface
     /**
      * @return bool
      */
-    public function getHttpOnly()
+    public function getHttpOnly(): bool
     {
         return $this->httpOnly;
     }
@@ -174,7 +174,7 @@ class PHPCookie implements CookieInterface
     /**
      * @param bool $httponly
      */
-    public function setHttpOnly($httponly)
+    public function setHttpOnly(bool $httponly): void
     {
         $this->httpOnly = $httponly;
     }
@@ -182,7 +182,7 @@ class PHPCookie implements CookieInterface
     /**
      * @return string
      */
-    public function getSameSite()
+    public function getSameSite(): string
     {
         return $this->sameSite;
     }
@@ -190,7 +190,7 @@ class PHPCookie implements CookieInterface
     /**
      * @param string $sameSite
      */
-    public function setSameSite($sameSite)
+    public function setSameSite(string $sameSite): void
     {
         $sameSite = ucfirst($sameSite);
         if (!in_array($sameSite, ["None", "Lax", "Strict"])) {

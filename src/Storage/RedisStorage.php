@@ -10,10 +10,12 @@ namespace mober\Rememberme\Storage;
  * Redis-Based Storage
  *
  * @author Michaël Thieulin
+ * @psalm-suppress UndefinedClass
  */
 class RedisStorage extends AbstractStorage
 {
     /**
+     * @psalm-suppress UndefinedClass
      * @param \Predis\Client $client
      * @param string         $keyPrefix
      */
@@ -22,13 +24,13 @@ class RedisStorage extends AbstractStorage
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
      *
      * @return int
      */
-    public function findTriplet($credential, $token, $persistentToken)
+    public function findTriplet(mixed $credential, string $token, string $persistentToken): int
     {
         // Hash the tokens, because they can contain a salt and can be accessed in redis
         $persistentToken = $this->hash($persistentToken);
@@ -49,14 +51,12 @@ class RedisStorage extends AbstractStorage
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire
-     *
-     * @return $this
+     * @param int $expire
      */
-    public function storeTriplet($credential, $token, $persistentToken, $expire = 0)
+    public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
     {
         // Hash the tokens, because they can contain a salt and can be accessed in redis
         $persistentToken = $this->hash($persistentToken);
@@ -67,28 +67,26 @@ class RedisStorage extends AbstractStorage
         if ($expire > 0) {
             $this->client->expireat($key, $expire);
         }
-
-        return $this;
     }
 
     /**
      * Replace current token after successful authentication
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire
+     * @param int $expire
      */
-    public function replaceTriplet($credential, $token, $persistentToken, $expire = 0)
+    public function replaceTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
     {
         $this->cleanTriplet($credential, $persistentToken);
         $this->storeTriplet($credential, $token, $persistentToken, $expire);
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $persistentToken
      */
-    public function cleanTriplet($credential, $persistentToken)
+    public function cleanTriplet(mixed $credential, string $persistentToken): void
     {
         $persistentToken = $this->hash($persistentToken);
         $key = $this->getKeyname($credential, $persistentToken);
@@ -101,7 +99,7 @@ class RedisStorage extends AbstractStorage
     /**
      * @param mixed $credential
      */
-    public function cleanAllTriplets($credential)
+    public function cleanAllTriplets(mixed $credential): void
     {
         foreach ($this->client->keys($this->keyPrefix . ':' . $credential . ':*') as $key) {
             $this->client->del($key);
@@ -115,7 +113,7 @@ class RedisStorage extends AbstractStorage
      *
      * @return void
      */
-    public function cleanExpiredTokens($expiryTime)
+    public function cleanExpiredTokens(int $expiryTime): void
     {
         // Redis will automatically delete the key after the timeout has expired.
     }
@@ -126,7 +124,7 @@ class RedisStorage extends AbstractStorage
      *
      * @return string
      */
-    protected function getKeyname($credential, $persistentToken)
+    protected function getKeyname(string $credential, string $persistentToken): string
     {
         return $this->keyPrefix . ':' . $credential . ':' . $persistentToken;
     }

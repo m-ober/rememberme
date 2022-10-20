@@ -18,17 +18,18 @@ class PDOStorage extends AbstractDBStorage
 {
     /**
      * @var PDO
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     protected PDO $connection;
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
      *
      * @return int
      */
-    public function findTriplet($credential, $token, $persistentToken)
+    public function findTriplet(mixed $credential, string $token, string $persistentToken): int
     {
         $sql = "SELECT $this->tokenColumn as token FROM {$this->tableName} WHERE {$this->credentialColumn} = ? " .
             "AND {$this->persistentTokenColumn} = ? AND {$this->expiresColumn} > ? LIMIT 1";
@@ -50,12 +51,12 @@ class PDOStorage extends AbstractDBStorage
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire
+     * @param int $expire
      */
-    public function storeTriplet($credential, $token, $persistentToken, $expire = 0)
+    public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
     {
         $sql = "INSERT INTO {$this->tableName}({$this->credentialColumn}, " .
             "{$this->tokenColumn}, {$this->persistentTokenColumn}, " .
@@ -68,10 +69,10 @@ class PDOStorage extends AbstractDBStorage
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $persistentToken
      */
-    public function cleanTriplet($credential, $persistentToken)
+    public function cleanTriplet(mixed $credential, string $persistentToken): void
     {
         $sql = "DELETE FROM {$this->tableName} WHERE {$this->credentialColumn} = ? " .
             "AND {$this->persistentTokenColumn} = ?";
@@ -82,14 +83,14 @@ class PDOStorage extends AbstractDBStorage
 
     /**
      * Replace current token after successful authentication
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire
+     * @param int $expire
      *
      * @throws PDOException
      */
-    public function replaceTriplet($credential, $token, $persistentToken, $expire = 0)
+    public function replaceTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
     {
         try {
             $this->connection->beginTransaction();
@@ -105,7 +106,7 @@ class PDOStorage extends AbstractDBStorage
     /**
      * @param mixed $credential
      */
-    public function cleanAllTriplets($credential)
+    public function cleanAllTriplets(mixed $credential): void
     {
         $sql = "DELETE FROM {$this->tableName} WHERE {$this->credentialColumn} = ? ";
 
@@ -120,7 +121,7 @@ class PDOStorage extends AbstractDBStorage
      *
      * @return void
      */
-    public function cleanExpiredTokens($expiryTime)
+    public function cleanExpiredTokens(int $expiryTime): void
     {
         $sql = "DELETE FROM {$this->tableName} WHERE {$this->expiresColumn} < ? ";
 
@@ -132,7 +133,7 @@ class PDOStorage extends AbstractDBStorage
     /**
      * @return PDO
      */
-    public function getConnection()
+    public function getConnection(): PDO
     {
         return $this->connection;
     }
@@ -140,7 +141,7 @@ class PDOStorage extends AbstractDBStorage
     /**
      * @param PDO $connection
      */
-    public function setConnection(PDO $connection)
+    public function setConnection(PDO $connection): void
     {
         $this->connection = $connection;
     }

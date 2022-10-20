@@ -20,24 +20,24 @@ class Authenticator
     /**
      * @var Cookie\CookieInterface
      */
-    protected $cookie;
+    protected Cookie\CookieInterface $cookie;
 
     /**
      * @var Token\TokenInterface
      */
-    protected $tokenGenerator;
+    protected Token\TokenInterface $tokenGenerator;
 
     /**
      * Number of seconds in the future tokens in the storage will expire (defaults to 1 week)
      * @var int
      */
-    protected $expireTime = 604800;
+    protected int $expireTime = 604800;
 
     /**
      * If the login token was invalid, delete all login tokens of this user
      * @var bool
      */
-    protected $cleanStoredTokensOnInvalidResult = true;
+    protected bool $cleanStoredTokensOnInvalidResult = true;
 
     /**
      * Always clean expired tokens of users when login is called.
@@ -47,13 +47,13 @@ class Authenticator
      *
      * @var bool
      */
-    protected $cleanExpiredTokensOnLogin = false;
+    protected bool $cleanExpiredTokensOnLogin = false;
 
     /**
      * Additional salt to add more entropy when the tokens are stored as hashes.
      * @var string
      */
-    protected $salt = "";
+    protected string $salt = "";
 
     /**
      * @param Storage\AbstractStorage $storage
@@ -81,7 +81,7 @@ class Authenticator
      *
      * @throws Exception
      */
-    public function login()
+    public function login(): LoginResult
     {
         $cookieValue = $this->cookie->getValue();
 
@@ -142,7 +142,7 @@ class Authenticator
      *
      * @throws Exception
      */
-    public function createCookie($credential)
+    public function createCookie(mixed $credential): static
     {
         $newToken = $this->tokenGenerator->createToken();
         $newPersistentToken = $this->tokenGenerator->createToken();
@@ -160,7 +160,7 @@ class Authenticator
      * remove current login triplet from storage.
      * @return boolean
      */
-    public function clearCookie()
+    public function clearCookie(): bool
     {
 
         $triplet = Triplet::fromString($this->cookie->getValue());
@@ -181,7 +181,7 @@ class Authenticator
      *
      * @return $this
      */
-    public function setCookie(CookieInterface $cookie)
+    public function setCookie(CookieInterface $cookie): static
     {
         $this->cookie = $cookie;
 
@@ -191,7 +191,7 @@ class Authenticator
     /**
      * @return CookieInterface
      */
-    public function getCookie()
+    public function getCookie(): CookieInterface
     {
         return $this->cookie;
     }
@@ -199,9 +199,9 @@ class Authenticator
     /**
      * @param bool $cleanStoredCookies
      *
-     * @return Authenticator
+     * @return static
      */
-    public function setCleanStoredTokensOnInvalidResult($cleanStoredCookies)
+    public function setCleanStoredTokensOnInvalidResult(bool $cleanStoredCookies): static
     {
         $this->cleanStoredTokensOnInvalidResult = $cleanStoredCookies;
 
@@ -211,7 +211,7 @@ class Authenticator
     /**
      * @return bool
      */
-    public function getCleanStoredTokensOnInvalidResult()
+    public function getCleanStoredTokensOnInvalidResult(): bool
     {
         return $this->cleanStoredTokensOnInvalidResult;
     }
@@ -220,7 +220,7 @@ class Authenticator
      * Return how many seconds in the future that the cookie will expire
      * @return int
      */
-    public function getExpireTime()
+    public function getExpireTime(): int
     {
         return $this->expireTime;
     }
@@ -230,9 +230,9 @@ class Authenticator
      *
      *                        Default is 604800 (1 week)
      *
-     * @return Authenticator
+     * @return static
      */
-    public function setExpireTime($expireTime)
+    public function setExpireTime(int $expireTime): static
     {
         $this->expireTime = $expireTime;
 
@@ -243,7 +243,7 @@ class Authenticator
      *
      * @return string
      */
-    public function getSalt()
+    public function getSalt(): string
     {
         return $this->salt;
     }
@@ -258,7 +258,7 @@ class Authenticator
      * You could also use a long random string that is unique to your application.
      * @param string $salt
      */
-    public function setSalt($salt)
+    public function setSalt(string $salt): void
     {
         $this->salt = $salt;
     }
@@ -266,7 +266,7 @@ class Authenticator
     /**
      * @return boolean
      */
-    public function isCleanExpiredTokensOnLogin()
+    public function isCleanExpiredTokensOnLogin(): bool
     {
         return $this->cleanExpiredTokensOnLogin;
     }
@@ -274,7 +274,7 @@ class Authenticator
     /**
      * @param boolean $cleanExpiredTokensOnLogin
      */
-    public function setCleanExpiredTokensOnLogin($cleanExpiredTokensOnLogin)
+    public function setCleanExpiredTokensOnLogin(bool $cleanExpiredTokensOnLogin): void
     {
         $this->cleanExpiredTokensOnLogin = $cleanExpiredTokensOnLogin;
     }

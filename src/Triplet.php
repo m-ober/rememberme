@@ -9,7 +9,7 @@ namespace mober\Rememberme;
 /**
  * Domain object for credential, persistent and transient token
  */
-class Triplet
+class Triplet implements \Stringable
 {
     /**
      * @param mixed $credential
@@ -28,7 +28,7 @@ class Triplet
      *
      * @return Triplet
      */
-    public static function fromString($tripletString)
+    public static function fromString(string $tripletString): Triplet
     {
         $parts = explode("|", $tripletString, 3);
 
@@ -42,15 +42,15 @@ class Triplet
     /**
      * @return bool
      */
-    public function isValid()
+    public function isValid(): bool
     {
         return $this->getCredential() !== '' && $this->getPersistentToken() !== '' && $this->getOneTimeToken() !== '';
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getCredential()
+    public function getCredential(): mixed
     {
         return $this->credential;
     }
@@ -58,7 +58,7 @@ class Triplet
     /**
      * @return string
      */
-    public function getPersistentToken()
+    public function getPersistentToken(): string
     {
         return $this->persistentToken;
     }
@@ -66,7 +66,7 @@ class Triplet
     /**
      * @return string
      */
-    public function getOneTimeToken()
+    public function getOneTimeToken(): string
     {
         return $this->oneTimeToken;
     }
@@ -76,7 +76,7 @@ class Triplet
      *
      * @return string
      */
-    public function getSaltedPersistentToken($salt)
+    public function getSaltedPersistentToken(string $salt): string
     {
         return $this->getPersistentToken() . $salt;
     }
@@ -86,7 +86,7 @@ class Triplet
      *
      * @return string
      */
-    public function getSaltedOneTimeToken($salt)
+    public function getSaltedOneTimeToken(string $salt): string
     {
         return $this->getOneTimeToken() . $salt;
     }
@@ -94,7 +94,7 @@ class Triplet
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return implode('|', [$this->getCredential(), $this->getOneTimeToken(), $this->getPersistentToken()]);
     }

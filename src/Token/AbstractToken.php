@@ -33,7 +33,7 @@ abstract class AbstractToken implements TokenInterface
      *
      * @return string
      */
-    protected function formatBytes($token)
+    protected function formatBytes(string $token): string
     {
         switch ($this->tokenFormat) {
             case self::FORMAT_HEX:

@@ -17,17 +17,20 @@ class RandomLibToken extends AbstractToken
     /**
      * @var Generator
      */
-    protected $generator;
+    protected Generator $generator;
 
-    protected $formatMap;
+    protected array $formatMap;
 
     /**
-     * @param int            $tokenBytes
-     * @param string         $tokenFormat
+     * @param int $tokenBytes
+     * @param string $tokenFormat
      * @param Generator|null $generator
      */
-    public function __construct($tokenBytes = 32, $tokenFormat = self::FORMAT_HEX, Generator $generator = null)
-    {
+    public function __construct(
+        int $tokenBytes = 32,
+        string $tokenFormat = self::FORMAT_HEX,
+        Generator $generator = null
+    ) {
         parent::__construct($tokenBytes, $tokenFormat);
         if (is_null($generator)) {
             $factory = new Factory();
@@ -46,7 +49,7 @@ class RandomLibToken extends AbstractToken
      * Generate a random, 32-byte Token
      * @return string
      */
-    public function createToken()
+    public function createToken(): string
     {
         return $this->generator->generateString($this->tokenBytes, $this->formatMap[$this->tokenFormat]);
     }

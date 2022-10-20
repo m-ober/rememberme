@@ -20,13 +20,13 @@ class FileStorage extends AbstractStorage
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
      *
      * @return int
      */
-    public function findTriplet($credential, $token, $persistentToken)
+    public function findTriplet(mixed $credential, string $token, string $persistentToken): int
     {
         // Hash the tokens, because they can contain a salt and can be accessed in the file system
         $persistentToken = $this->hash($persistentToken);
@@ -47,29 +47,25 @@ class FileStorage extends AbstractStorage
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire
-     *
-     * @return $this
+     * @param int $expire
      */
-    public function storeTriplet($credential, $token, $persistentToken, $expire)
+    public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
     {
         // Hash the tokens, because they can contain a salt and can be accessed in the file system
         $persistentToken = $this->hash($persistentToken);
         $token = $this->hash($token);
         $fn = $this->getFilename($credential, $persistentToken);
         file_put_contents($fn, $token);
-
-        return $this;
     }
 
     /**
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $persistentToken
      */
-    public function cleanTriplet($credential, $persistentToken)
+    public function cleanTriplet(mixed $credential, string $persistentToken): void
     {
         $persistentToken = $this->hash($persistentToken);
         $fn = $this->getFilename($credential, $persistentToken);
@@ -81,12 +77,12 @@ class FileStorage extends AbstractStorage
 
     /**
      * Replace current token after successful authentication
-     * @param mixed  $credential
+     * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     * @param int    $expire
+     * @param int $expire
      */
-    public function replaceTriplet($credential, $token, $persistentToken, $expire)
+    public function replaceTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
     {
         $this->cleanTriplet($credential, $persistentToken);
         $this->storeTriplet($credential, $token, $persistentToken, $expire);
@@ -95,7 +91,7 @@ class FileStorage extends AbstractStorage
     /**
      * @param mixed $credential
      */
-    public function cleanAllTriplets($credential)
+    public function cleanAllTriplets(mixed $credential): void
     {
         foreach (glob($this->path . DIRECTORY_SEPARATOR . $credential . ".*" . $this->suffix) as $file) {
             unlink($file);
@@ -109,7 +105,7 @@ class FileStorage extends AbstractStorage
      *
      * @return void
      */
-    public function cleanExpiredTokens($expiryTime)
+    public function cleanExpiredTokens(int $expiryTime): void
     {
         foreach (glob($this->path . DIRECTORY_SEPARATOR . "*" . $this->suffix) as $file) {
             if (filemtime($file) < $expiryTime) {
@@ -119,12 +115,12 @@ class FileStorage extends AbstractStorage
     }
 
     /**
-     * @param $credential
-     * @param $persistentToken
+     * @param mixed $credential
+     * @param string $persistentToken
      *
      * @return string
      */
-    protected function getFilename($credential, $persistentToken)
+    protected function getFilename(mixed $credential, string $persistentToken): string
     {
         return $this->path . DIRECTORY_SEPARATOR . $credential . "." . $persistentToken . $this->suffix;
     }

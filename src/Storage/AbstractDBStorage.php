@@ -18,36 +18,36 @@ abstract class AbstractDBStorage extends AbstractStorage
      *
      * @var string
      */
-    protected $tableName = "";
+    protected string $tableName = "";
 
     /**
      *
      * @var string
      */
-    protected $credentialColumn = "";
+    protected string $credentialColumn = "";
 
     /**
      *
      * @var string
      */
-    protected $tokenColumn = "";
+    protected string $tokenColumn = "";
 
     /**
      *
      * @var string
      */
-    protected $persistentTokenColumn = "";
+    protected string $persistentTokenColumn = "";
 
     /**
      *
      * @var string
      */
-    protected $expiresColumn = "";
+    protected string $expiresColumn = "";
 
     /**
      * @param array $options
      */
-    public function __construct($options)
+    public function __construct(array $options)
     {
         foreach ($options as $prop => $value) {
             $setter = "set" . ucfirst($prop);
@@ -60,7 +60,7 @@ abstract class AbstractDBStorage extends AbstractStorage
     /**
      * @return string
      */
-    public function getTableName()
+    public function getTableName(): string
     {
         return $this->tableName;
     }
@@ -70,7 +70,7 @@ abstract class AbstractDBStorage extends AbstractStorage
      *
      * @return $this
      */
-    public function setTableName($tableName)
+    public function setTableName(string $tableName): static
     {
         $this->tableName = $tableName;
 
@@ -80,7 +80,7 @@ abstract class AbstractDBStorage extends AbstractStorage
     /**
      * @return string
      */
-    public function getCredentialColumn()
+    public function getCredentialColumn(): string
     {
         return $this->credentialColumn;
     }
@@ -90,7 +90,7 @@ abstract class AbstractDBStorage extends AbstractStorage
      *
      * @return $this
      */
-    public function setCredentialColumn($credentialColumn)
+    public function setCredentialColumn($credentialColumn): static
     {
         $this->credentialColumn = $credentialColumn;
 
@@ -100,7 +100,7 @@ abstract class AbstractDBStorage extends AbstractStorage
     /**
      * @return string
      */
-    public function getTokenColumn()
+    public function getTokenColumn(): string
     {
         return $this->tokenColumn;
     }
@@ -110,7 +110,7 @@ abstract class AbstractDBStorage extends AbstractStorage
      *
      * @return $this
      */
-    public function setTokenColumn($tokenColumn)
+    public function setTokenColumn(string $tokenColumn): static
     {
         $this->tokenColumn = $tokenColumn;
 
@@ -120,7 +120,7 @@ abstract class AbstractDBStorage extends AbstractStorage
     /**
      * @return string
      */
-    public function getPersistentTokenColumn()
+    public function getPersistentTokenColumn(): string
     {
         return $this->persistentTokenColumn;
     }
@@ -130,7 +130,7 @@ abstract class AbstractDBStorage extends AbstractStorage
      *
      * @return $this
      */
-    public function setPersistentTokenColumn($persistentTokenColumn)
+    public function setPersistentTokenColumn(string $persistentTokenColumn): static
     {
         $this->persistentTokenColumn = $persistentTokenColumn;
 
@@ -140,7 +140,7 @@ abstract class AbstractDBStorage extends AbstractStorage
     /**
      * @return string
      */
-    public function getExpiresColumn()
+    public function getExpiresColumn(): string
     {
         return $this->expiresColumn;
     }
@@ -150,7 +150,7 @@ abstract class AbstractDBStorage extends AbstractStorage
      *
      * @return $this
      */
-    public function setExpiresColumn($expiresColumn)
+    public function setExpiresColumn(string $expiresColumn): static
     {
         $this->expiresColumn = $expiresColumn;
 

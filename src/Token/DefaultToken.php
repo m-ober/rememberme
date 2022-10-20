@@ -20,8 +20,9 @@ class DefaultToken extends AbstractToken
      *
      * @throws Exception
      */
-    public function createToken()
+    public function createToken(): string
     {
+        /** @psalm-suppress ArgumentTypeCoercion */
         return $this->formatBytes(random_bytes($this->tokenBytes));
     }
 }

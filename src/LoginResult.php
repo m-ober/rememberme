@@ -32,7 +32,7 @@ class LoginResult
      *
      * @return LoginResult
      */
-    public static function newSuccessResult($credential)
+    public static function newSuccessResult(mixed $credential): LoginResult
     {
         return new self(true, true, true, $credential);
     }
@@ -42,7 +42,7 @@ class LoginResult
      *
      * @return LoginResult
      */
-    public static function newManipulationResult()
+    public static function newManipulationResult(): LoginResult
     {
         return new self(true, true, false);
     }
@@ -52,7 +52,7 @@ class LoginResult
      *
      * @return LoginResult
      */
-    public static function newExpiredResult()
+    public static function newExpiredResult(): LoginResult
     {
         return new self(true, false, false);
     }
@@ -60,7 +60,7 @@ class LoginResult
     /**
      * @return LoginResult
      */
-    public static function newNoCookieResult()
+    public static function newNoCookieResult(): LoginResult
     {
         return new self(false);
     }
@@ -68,7 +68,7 @@ class LoginResult
     /**
      * @return bool
      */
-    public function cookieExists()
+    public function cookieExists(): bool
     {
         return $this->cookieExists;
     }
@@ -76,7 +76,7 @@ class LoginResult
     /**
      * @return bool
      */
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->cookieExists && $this->tripleWasFound && $this->tripleWasValid;
     }
@@ -84,7 +84,7 @@ class LoginResult
     /**
      * @return bool
      */
-    public function hasPossibleManipulation()
+    public function hasPossibleManipulation(): bool
     {
         return $this->cookieExists && $this->tripleWasFound && !$this->tripleWasValid;
     }
@@ -92,7 +92,7 @@ class LoginResult
     /**
      * @return bool
      */
-    public function isExpired()
+    public function isExpired(): bool
     {
         return $this->cookieExists && !$this->tripleWasFound;
     }
@@ -100,7 +100,7 @@ class LoginResult
     /**
      * @return mixed|null
      */
-    public function getCredential()
+    public function getCredential(): mixed
     {
         return $this->credential;
     }
