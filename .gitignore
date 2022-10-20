@@ -1,8 +1,6 @@
 .idea
 nbproject
-
 example/tokens/
-
 .phpunit.result.cache
-
+composer.phar
 /vendor/
