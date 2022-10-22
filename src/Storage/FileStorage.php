@@ -4,6 +4,8 @@
  * @license MIT
  */
 
+declare(strict_types=1);
+
 namespace mober\Rememberme\Storage;
 
 /**
