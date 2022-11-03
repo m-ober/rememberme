@@ -2,6 +2,7 @@
 
 use mober\Rememberme\Cookie\CookieInterface;
 use mober\Rememberme\Storage\AbstractStorage;
+use mober\Rememberme\Triplet;
 use PHPUnit\Framework\TestCase;
 
 class RemembermeTest extends TestCase
@@ -60,7 +61,7 @@ class RemembermeTest extends TestCase
 
     public function testLoginTriesToFindTripletWithValuesFromCookie()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
             $this->userid,
             $this->validToken,
             $this->validPersistentToken,
@@ -75,7 +76,7 @@ class RemembermeTest extends TestCase
 
     public function testSuccessIsTrueIfTripletIsFound()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
             $this->userid,
             $this->validToken,
             $this->validPersistentToken,
@@ -89,7 +90,7 @@ class RemembermeTest extends TestCase
 
     public function testCredentialsAreInResultIfTripletIsFound()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
             $this->userid,
             $this->validToken,
             $this->validPersistentToken,
@@ -103,7 +104,7 @@ class RemembermeTest extends TestCase
 
     public function testStoreNewTripletInCookieIfTripletIsFound()
     {
-        $oldcookieValue = implode("|", array(
+        $oldcookieValue = implode(Triplet::SEPARATOR, array(
         $this->userid, $this->validToken, $this->validPersistentToken, ));
         $this->cookie->method("getValue")->willReturn($oldcookieValue);
         $this->storage->expects($this->once())
@@ -122,7 +123,7 @@ class RemembermeTest extends TestCase
 
     public function testReplaceTripletInStorageIfTripletIsFound()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
             $this->userid,
             $this->validToken,
             $this->validPersistentToken,
@@ -145,7 +146,7 @@ class RemembermeTest extends TestCase
 
     public function testCookieContainsUserIDAndHexTokensIfTripletIsFound()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
             $this->userid,
             $this->validToken,
             $this->validPersistentToken,
@@ -163,7 +164,7 @@ class RemembermeTest extends TestCase
 
     public function testCookieContainsNewTokenIfTripletIsFound()
     {
-        $oldcookieValue = implode("|", array(
+        $oldcookieValue = implode(Triplet::SEPARATOR, array(
         $this->userid, $this->validToken, $this->validPersistentToken, ));
         $this->cookie->method("getValue")->willReturn($oldcookieValue);
         $this->storage->expects($this->once())
@@ -184,7 +185,7 @@ class RemembermeTest extends TestCase
 
     public function testResultIndicatesExpiredWhenTripletIsNotFound()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
         $this->userid, $this->validToken, $this->validPersistentToken, )));
         $this->storage->expects($this->once())
           ->method("findTriplet")
@@ -198,7 +199,7 @@ class RemembermeTest extends TestCase
 
     public function testResultIndicatesManipulationIfTripletIsInvalid()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
         $this->userid, $this->invalidToken, $this->validPersistentToken, )));
         $this->storage->expects($this->once())
           ->method("findTriplet")
@@ -212,7 +213,7 @@ class RemembermeTest extends TestCase
 
     public function testCookieIsExpiredIfTripletIsInvalid()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
         $this->userid, $this->invalidToken, $this->validPersistentToken, )));
         $this->storage->expects($this->once())
           ->method("findTriplet")
@@ -224,7 +225,7 @@ class RemembermeTest extends TestCase
 
     public function testAllStoredTokensAreClearedIfTripletIsInvalid()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
         $this->userid, $this->invalidToken, $this->validPersistentToken, )));
         $this->storage->expects($this->any())
         ->method("findTriplet")
@@ -243,7 +244,7 @@ class RemembermeTest extends TestCase
     public function testSaltIsAddedToTokensOnLogin()
     {
         $salt = "Mozilla Firefox 4.0";
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
         $this->userid, $this->validToken, $this->validPersistentToken, )));
         $this->storage->expects($this->once())
         ->method("findTriplet")
@@ -278,7 +279,7 @@ class RemembermeTest extends TestCase
     public function testSaltIsAddedToTokensOnClearCookie()
     {
         $salt = "Mozilla Firefox 4.0";
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
         $this->userid, $this->validToken, $this->validPersistentToken, )));
         $this->storage->expects($this->once())
         ->method("cleanTriplet")
@@ -313,7 +314,7 @@ class RemembermeTest extends TestCase
 
     public function testClearCookieExpiresCookieAndDeletesTriplet()
     {
-        $this->cookie->method("getValue")->willReturn(implode("|", array(
+        $this->cookie->method("getValue")->willReturn(implode(Triplet::SEPARATOR, array(
         $this->userid, $this->validToken, $this->validPersistentToken, )));
         $now = time();
         $this->cookie->expects($this->once())

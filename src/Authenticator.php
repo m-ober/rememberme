@@ -152,7 +152,7 @@ class Authenticator
         $expire = time() + $this->expireTime;
 
         $this->storage->storeTriplet($credential, $newToken . $this->salt, $newPersistentToken . $this->salt, $expire);
-        $this->cookie->setValue(implode("|", array($credential, $newToken, $newPersistentToken)));
+        $this->cookie->setValue(implode(Triplet::SEPARATOR, array($credential, $newToken, $newPersistentToken)));
 
         return $this;
     }

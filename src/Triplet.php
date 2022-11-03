@@ -13,6 +13,8 @@ namespace mober\Rememberme;
  */
 class Triplet implements \Stringable
 {
+    public const SEPARATOR = '|';
+
     /**
      * @param mixed $credential
      * @param string $oneTimeToken
@@ -32,7 +34,7 @@ class Triplet implements \Stringable
      */
     public static function fromString(string $tripletString): Triplet
     {
-        $parts = explode("|", $tripletString, 3);
+        $parts = explode(self::SEPARATOR, $tripletString, 3);
 
         if (count($parts) < 3) {
             return new Triplet();
@@ -98,6 +100,10 @@ class Triplet implements \Stringable
      */
     public function __toString(): string
     {
-        return implode('|', [$this->getCredential(), $this->getOneTimeToken(), $this->getPersistentToken()]);
+        return implode(self::SEPARATOR, [
+            $this->getCredential(),
+            $this->getOneTimeToken(),
+            $this->getPersistentToken(),
+        ]);
     }
 }
