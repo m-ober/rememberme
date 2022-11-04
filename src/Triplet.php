@@ -35,6 +35,9 @@ class Triplet implements \Stringable
     {
         $parts = explode(self::SEPARATOR, $tripletString);
 
+        // If the credential contains the separator, this check might be pass
+        // even though parts are missing.
+
         if (count($parts) < 3) {
             return new Triplet();
         }
