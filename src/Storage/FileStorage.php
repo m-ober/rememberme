@@ -40,7 +40,7 @@ class FileStorage extends AbstractStorage
 
         $fileToken = trim(file_get_contents($fn));
 
-        if ($fileToken === $token) {
+        if (hash_equals($fileToken, $token)) {
             return self::TRIPLET_FOUND;
         }
 

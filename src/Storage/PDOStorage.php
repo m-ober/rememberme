@@ -43,7 +43,7 @@ class PDOStorage extends AbstractDBStorage
             return self::TRIPLET_NOT_FOUND;
         }
 
-        if ($this->hash($token) === $result) {
+        if (hash_equals($result, $this->hash($token))) {
             return self::TRIPLET_FOUND;
         }
 

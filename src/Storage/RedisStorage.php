@@ -43,7 +43,7 @@ class RedisStorage extends AbstractStorage
 
         $redisToken = trim($this->client->get($key));
 
-        if ($redisToken === $token) {
+        if (hash_equals($redisToken, $token)) {
             return self::TRIPLET_FOUND;
         }
 
