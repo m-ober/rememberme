@@ -47,14 +47,7 @@ class PHPCookie implements CookieInterface
     {
         $expire = time() + $this->expireTime;
         $_COOKIE[$this->name] = $value;
-        setcookie($this->name, $value, [
-            'expires'  => $expire,
-            'path'     => $this->path,
-            'domain'   => $this->domain,
-            'secure'   => $this->secure,
-            'httponly' => $this->httpOnly,
-            'samesite' => $this->sameSite,
-        ]);
+        $this->setcookieHelper($value, $expire);
     }
 
     /**
@@ -73,11 +66,21 @@ class PHPCookie implements CookieInterface
     {
         $expire = time() - $this->expireTime;
         unset($_COOKIE[$this->name]);
-        setcookie($this->name, "", [
-            'expires'  => $expire,
-            'path'     => $this->path,
-            'domain'   => $this->domain,
-            'secure'   => $this->secure,
+        $this->setcookieHelper("", $expire);
+    }
+
+    /**
+     * @param string $value
+     * @param int $expire
+     * @return void
+     */
+    private function setcookieHelper(string $value, int $expire): void
+    {
+        setcookie($this->name, $value, [
+            'expires' => $expire,
+            'path' => $this->path,
+            'domain' => $this->domain,
+            'secure' => $this->secure,
             'httponly' => $this->httpOnly,
             'samesite' => $this->sameSite,
         ]);
