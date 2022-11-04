@@ -13,7 +13,6 @@ use PDOException;
 
 /**
  * Store login tokens in database with PDO class
- *
  * @author birke
  */
 class PDOStorage extends AbstractDBStorage
@@ -28,7 +27,6 @@ class PDOStorage extends AbstractDBStorage
      * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     *
      * @return int
      */
     public function findTriplet(mixed $credential, string $token, string $persistentToken): int
@@ -37,7 +35,7 @@ class PDOStorage extends AbstractDBStorage
             "AND {$this->persistentTokenColumn} = ? AND {$this->expiresColumn} > ? LIMIT 1";
 
         $query = $this->connection->prepare($sql);
-        $query->execute(array($credential, $this->hash($persistentToken), date("Y-m-d H:i:s")));
+        $query->execute([$credential, $this->hash($persistentToken), date("Y-m-d H:i:s")]);
 
         $result = $query->fetchColumn();
 
@@ -66,7 +64,7 @@ class PDOStorage extends AbstractDBStorage
 
         $query = $this->connection->prepare($sql);
         $query->execute(
-            array($credential, $this->hash($token), $this->hash($persistentToken), date("Y-m-d H:i:s", $expire))
+            [$credential, $this->hash($token), $this->hash($persistentToken), date("Y-m-d H:i:s", $expire)],
         );
     }
 
@@ -80,7 +78,7 @@ class PDOStorage extends AbstractDBStorage
             "AND {$this->persistentTokenColumn} = ?";
 
         $query = $this->connection->prepare($sql);
-        $query->execute(array($credential, $this->hash($persistentToken)));
+        $query->execute([$credential, $this->hash($persistentToken)]);
     }
 
     /**
@@ -89,7 +87,6 @@ class PDOStorage extends AbstractDBStorage
      * @param string $token
      * @param string $persistentToken
      * @param int $expire
-     *
      * @throws PDOException
      */
     public function replaceTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
@@ -113,14 +110,12 @@ class PDOStorage extends AbstractDBStorage
         $sql = "DELETE FROM {$this->tableName} WHERE {$this->credentialColumn} = ? ";
 
         $query = $this->connection->prepare($sql);
-        $query->execute(array($credential));
+        $query->execute([$credential]);
     }
 
     /**
      * Remove all expired triplets of all users.
-     *
      * @param int $expiryTime Timestamp, all tokens before this time will be deleted
-     *
      * @return void
      */
     public function cleanExpiredTokens(int $expiryTime): void
@@ -128,7 +123,7 @@ class PDOStorage extends AbstractDBStorage
         $sql = "DELETE FROM {$this->tableName} WHERE {$this->expiresColumn} < ? ";
 
         $query = $this->connection->prepare($sql);
-        $query->execute(array(date("Y-m-d H:i:s", $expiryTime)));
+        $query->execute([date("Y-m-d H:i:s", $expiryTime)]);
     }
 
 

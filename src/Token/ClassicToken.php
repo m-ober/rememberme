@@ -10,7 +10,6 @@ namespace mober\Rememberme\Token;
 
 /**
  * Generate an insecure token with the uniqid function.
- *
  * This is only for backwards compatibility with Version 1.
  */
 class ClassicToken implements TokenInterface

@@ -29,7 +29,6 @@ class Triplet implements \Stringable
 
     /**
      * @param string $tripletString
-     *
      * @return Triplet
      */
     public static function fromString(string $tripletString): Triplet
@@ -77,7 +76,6 @@ class Triplet implements \Stringable
 
     /**
      * @param string $salt
-     *
      * @return string
      */
     public function getSaltedPersistentToken(string $salt): string
@@ -87,7 +85,6 @@ class Triplet implements \Stringable
 
     /**
      * @param string $salt
-     *
      * @return string
      */
     public function getSaltedOneTimeToken(string $salt): string

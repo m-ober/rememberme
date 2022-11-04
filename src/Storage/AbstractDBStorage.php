@@ -11,37 +11,31 @@ namespace mober\Rememberme\Storage;
 /**
  * This abstract class contains properties with getters and setters for all
  * database storage classes
- *
  * @author Gabriel Birke
  */
 abstract class AbstractDBStorage extends AbstractStorage
 {
     /**
-     *
      * @var string
      */
     protected string $tableName = "";
 
     /**
-     *
      * @var string
      */
     protected string $credentialColumn = "";
 
     /**
-     *
      * @var string
      */
     protected string $tokenColumn = "";
 
     /**
-     *
      * @var string
      */
     protected string $persistentTokenColumn = "";
 
     /**
-     *
      * @var string
      */
     protected string $expiresColumn = "";
@@ -69,7 +63,6 @@ abstract class AbstractDBStorage extends AbstractStorage
 
     /**
      * @param string $tableName
-     *
      * @return $this
      */
     public function setTableName(string $tableName): static
@@ -89,7 +82,6 @@ abstract class AbstractDBStorage extends AbstractStorage
 
     /**
      * @param string $credentialColumn
-     *
      * @return $this
      */
     public function setCredentialColumn($credentialColumn): static
@@ -109,7 +101,6 @@ abstract class AbstractDBStorage extends AbstractStorage
 
     /**
      * @param string $tokenColumn
-     *
      * @return $this
      */
     public function setTokenColumn(string $tokenColumn): static
@@ -129,7 +120,6 @@ abstract class AbstractDBStorage extends AbstractStorage
 
     /**
      * @param string $persistentTokenColumn
-     *
      * @return $this
      */
     public function setPersistentTokenColumn(string $persistentTokenColumn): static
@@ -149,7 +139,6 @@ abstract class AbstractDBStorage extends AbstractStorage
 
     /**
      * @param string $expiresColumn
-     *
      * @return $this
      */
     public function setExpiresColumn(string $expiresColumn): static

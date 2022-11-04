@@ -31,7 +31,7 @@ class RandomLibToken extends AbstractToken
     public function __construct(
         int $tokenBytes = 32,
         string $tokenFormat = self::FORMAT_HEX,
-        Generator $generator = null
+        Generator $generator = null,
     ) {
         parent::__construct($tokenBytes, $tokenFormat);
         if (is_null($generator)) {

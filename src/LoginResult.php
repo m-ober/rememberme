@@ -14,9 +14,9 @@ namespace mober\Rememberme;
 class LoginResult
 {
     /**
-     * @param bool  $cookieExists
-     * @param bool  $tripleWasFound
-     * @param bool  $tripleWasValid
+     * @param bool $cookieExists
+     * @param bool $tripleWasFound
+     * @param bool $tripleWasValid
      * @param mixed $credential
      */
     private function __construct(
@@ -29,9 +29,7 @@ class LoginResult
 
     /**
      * Create new successful result with credentials
-     *
      * @param mixed $credential
-     *
      * @return LoginResult
      */
     public static function newSuccessResult(mixed $credential): LoginResult
@@ -41,7 +39,6 @@ class LoginResult
 
     /**
      * Create new result that indicates that the tokens might have been manipulated
-     *
      * @return LoginResult
      */
     public static function newManipulationResult(): LoginResult
@@ -51,7 +48,6 @@ class LoginResult
 
     /**
      * Create new result that indicates the tokens have expired
-     *
      * @return LoginResult
      */
     public static function newExpiredResult(): LoginResult

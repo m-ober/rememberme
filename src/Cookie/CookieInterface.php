@@ -21,7 +21,6 @@ interface CookieInterface
 
     /**
      * Set the value of the cookie.
-     *
      * It is strongly recommended that implementations of this interface extend
      * the expiration date of the cookie whenever a value is set.
      * @param string $value

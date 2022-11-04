@@ -10,7 +10,6 @@ namespace mober\Rememberme\Storage;
 
 /**
  * Redis-Based Storage
- *
  * @author Michaël Thieulin
  * @psalm-suppress UndefinedClass
  */
@@ -19,7 +18,7 @@ class RedisStorage extends AbstractStorage
     /**
      * @psalm-suppress UndefinedClass
      * @param \Predis\Client $client
-     * @param string         $keyPrefix
+     * @param string $keyPrefix
      */
     public function __construct(protected \Predis\Client $client, protected string $keyPrefix = 'rememberme')
     {
@@ -29,7 +28,6 @@ class RedisStorage extends AbstractStorage
      * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     *
      * @return int
      */
     public function findTriplet(mixed $credential, string $token, string $persistentToken): int
@@ -110,9 +108,7 @@ class RedisStorage extends AbstractStorage
 
     /**
      * Remove all expired triplets of all users.
-     *
      * @param int $expiryTime Timestamp, all tokens before this time will be deleted
-     *
      * @return void
      */
     public function cleanExpiredTokens(int $expiryTime): void
@@ -123,7 +119,6 @@ class RedisStorage extends AbstractStorage
     /**
      * @param string $credential
      * @param string $persistentToken
-     *
      * @return string
      */
     protected function getKeyname(string $credential, string $persistentToken): string

@@ -43,10 +43,8 @@ class Authenticator
 
     /**
      * Always clean expired tokens of users when login is called.
-     *
      * Disabled by default for performance reasons, but useful for
      * hosted systems that can't run periodic scripts.
-     *
      * @var bool
      */
     protected bool $cleanExpiredTokensOnLogin = false;
@@ -59,8 +57,8 @@ class Authenticator
 
     /**
      * @param Storage\AbstractStorage $storage
-     * @param TokenInterface          $tokenGenerator
-     * @param Cookie\CookieInterface  $cookie
+     * @param TokenInterface $tokenGenerator
+     * @param Cookie\CookieInterface $cookie
      */
     public function __construct(
         protected Storage\AbstractStorage $storage,
@@ -80,7 +78,6 @@ class Authenticator
     /**
      * Check Credentials from cookie. Returns false if login was not successful, credential string if it was successful
      * @return LoginResult
-     *
      * @throws Exception
      */
     public function login(): LoginResult
@@ -104,7 +101,7 @@ class Authenticator
         $tripletLookupResult = $this->storage->findTriplet(
             $triplet->getCredential(),
             $triplet->getSaltedOneTimeToken($this->salt),
-            $triplet->getSaltedPersistentToken($this->salt)
+            $triplet->getSaltedPersistentToken($this->salt),
         );
         switch ($tripletLookupResult) {
             case Storage\AbstractStorage::TRIPLET_FOUND:
@@ -118,9 +115,9 @@ class Authenticator
                     $newTriplet->getCredential(),
                     $newTriplet->getSaltedOneTimeToken($this->salt),
                     $newTriplet->getSaltedPersistentToken($this->salt),
-                    $expire
+                    $expire,
                 );
-                $this->cookie->setValue((string) $newTriplet);
+                $this->cookie->setValue((string)$newTriplet);
 
                 return LoginResult::newSuccessResult($triplet->getCredential());
 
@@ -139,9 +136,7 @@ class Authenticator
 
     /**
      * @param mixed $credential
-     *
      * @return $this
-     *
      * @throws Exception
      */
     public function createCookie(mixed $credential): static
@@ -152,7 +147,7 @@ class Authenticator
         $expire = time() + $this->expireTime;
 
         $this->storage->storeTriplet($credential, $newToken . $this->salt, $newPersistentToken . $this->salt, $expire);
-        $this->cookie->setValue(implode(Triplet::SEPARATOR, array($credential, $newToken, $newPersistentToken)));
+        $this->cookie->setValue(implode(Triplet::SEPARATOR, [$credential, $newToken, $newPersistentToken]));
 
         return $this;
     }
@@ -164,7 +159,6 @@ class Authenticator
      */
     public function clearCookie(): bool
     {
-
         $triplet = Triplet::fromString($this->cookie->getValue());
 
         $this->cookie->deleteCookie();
@@ -180,7 +174,6 @@ class Authenticator
 
     /**
      * @param CookieInterface $cookie
-     *
      * @return $this
      */
     public function setCookie(CookieInterface $cookie): static
@@ -200,7 +193,6 @@ class Authenticator
 
     /**
      * @param bool $cleanStoredCookies
-     *
      * @return static
      */
     public function setCleanStoredTokensOnInvalidResult(bool $cleanStoredCookies): static
@@ -229,9 +221,7 @@ class Authenticator
 
     /**
      * @param int $expireTime How many seconds in the future the cookie will expire
-     *
      *                        Default is 604800 (1 week)
-     *
      * @return static
      */
     public function setExpireTime(int $expireTime): static
@@ -242,7 +232,6 @@ class Authenticator
     }
 
     /**
-     *
      * @return string
      */
     public function getSalt(): string
@@ -254,7 +243,6 @@ class Authenticator
      * The salt is additional information that is added to the tokens to make
      * them more unique and secure. The salt is not stored in the cookie and
      * should not be saved in the storage.
-     *
      * For example, to bind a token to an IP address use $_SERVER['REMOTE_ADDR'].
      * To bind a token to the browser (user agent), use $_SERVER['HTTP_USER_AGENT].
      * You could also use a long random string that is unique to your application.

@@ -17,9 +17,7 @@ class DefaultToken extends AbstractToken
 {
     /**
      * @inheritdoc
-     *
      * @return string
-     *
      * @throws Exception
      */
     public function createToken(): string

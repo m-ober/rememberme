@@ -41,7 +41,6 @@ class PHPCookie implements CookieInterface
 
     /**
      * @inheritdoc
-     *
      * @param string $value
      */
     public function setValue(string $value): void
@@ -60,7 +59,6 @@ class PHPCookie implements CookieInterface
 
     /**
      * @inheritdoc
-     *
      * @return string
      */
     public function getValue(): string

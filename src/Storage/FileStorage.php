@@ -25,7 +25,6 @@ class FileStorage extends AbstractStorage
      * @param mixed $credential
      * @param string $token
      * @param string $persistentToken
-     *
      * @return int
      */
     public function findTriplet(mixed $credential, string $token, string $persistentToken): int
@@ -102,9 +101,7 @@ class FileStorage extends AbstractStorage
 
     /**
      * Remove all expired triplets of all users.
-     *
      * @param int $expiryTime Timestamp, all tokens before this time will be deleted
-     *
      * @return void
      */
     public function cleanExpiredTokens(int $expiryTime): void
@@ -119,7 +116,6 @@ class FileStorage extends AbstractStorage
     /**
      * @param mixed $credential
      * @param string $persistentToken
-     *
      * @return string
      */
     protected function getFilename(mixed $credential, string $persistentToken): string
