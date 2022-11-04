@@ -128,7 +128,8 @@ class AuthenticatorTest extends TestCase
             ->with(
                 $this->logicalAnd(
                     $this->matchesRegularExpression(
-                        '/^' . $this->userid . '\|[a-f0-9]{32,}\|' . $this->validPersistentToken . '$/',
+                        '/^' . $this->userid . preg_quote(Triplet::SEPARATOR) . '[a-f0-9]{32,}'
+                        . preg_quote(Triplet::SEPARATOR) . $this->validPersistentToken . '$/',
                     ),
                     $this->logicalNot($this->equalTo($oldcookieValue)),
                 ),
@@ -176,7 +177,8 @@ class AuthenticatorTest extends TestCase
         $this->cookie->expects($this->once())
             ->method("setValue")
             ->with(
-                $this->matchesRegularExpression('/^' . $this->userid . '\|[a-f0-9]{32,}\|[a-f0-9]{32,}$/'),
+                $this->matchesRegularExpression('/^' . $this->userid . preg_quote(Triplet::SEPARATOR)
+                    . '[a-f0-9]{32,}' . preg_quote(Triplet::SEPARATOR) . '[a-f0-9]{32,}$/'),
             );
         $this->rememberme->login();
     }
@@ -197,7 +199,8 @@ class AuthenticatorTest extends TestCase
             ->with(
                 $this->logicalAnd(
                     $this->matchesRegularExpression(
-                        '/^' . $this->userid . '\|[a-f0-9]{32,}\|' . $this->validPersistentToken . '$/',
+                        '/^' . $this->userid . preg_quote(Triplet::SEPARATOR)
+                        . '[a-f0-9]{32,}' . preg_quote(Triplet::SEPARATOR) . $this->validPersistentToken . '$/',
                     ),
                     $this->logicalNot($this->equalTo($oldcookieValue)),
                 ),
@@ -357,7 +360,8 @@ class AuthenticatorTest extends TestCase
         $this->cookie->expects($this->once())
             ->method("setValue")
             ->with(
-                $this->matchesRegularExpression('/^' . $this->userid . '\|[a-f0-9]{32,}\|[a-f0-9]{32,}$/'),
+                $this->matchesRegularExpression('/^' . $this->userid . preg_quote(Triplet::SEPARATOR)
+                    . '[a-f0-9]{32,}' . preg_quote(Triplet::SEPARATOR) . '[a-f0-9]{32,}$/'),
             );
         $testExpr = '/^[a-f0-9]{32,}$/';
         $this->storage->expects($this->once())
