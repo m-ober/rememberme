@@ -10,6 +10,7 @@ namespace mober\Rememberme;
 
 use mober\Rememberme\Cookie\CookieInterface;
 use mober\Rememberme\Cookie\PHPCookie;
+use mober\Rememberme\Storage\AbstractStorage;
 use mober\Rememberme\Token\DefaultToken;
 use mober\Rememberme\Token\TokenInterface;
 use Exception;
@@ -56,9 +57,9 @@ class Authenticator
     protected string $salt = "";
 
     /**
-     * @param Storage\AbstractStorage $storage
-     * @param TokenInterface $tokenGenerator
-     * @param Cookie\CookieInterface $cookie
+     * @param AbstractStorage $storage
+     * @param TokenInterface|null $tokenGenerator
+     * @param CookieInterface|null $cookie
      */
     public function __construct(
         protected Storage\AbstractStorage $storage,

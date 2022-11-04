@@ -84,7 +84,7 @@ abstract class AbstractDBStorage extends AbstractStorage
      * @param string $credentialColumn
      * @return $this
      */
-    public function setCredentialColumn($credentialColumn): static
+    public function setCredentialColumn(string $credentialColumn): static
     {
         $this->credentialColumn = $credentialColumn;
 
