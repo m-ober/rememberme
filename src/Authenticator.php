@@ -133,7 +133,9 @@ class Authenticator
                 }
 
                 return LoginResult::newManipulationResult();
+
             default:
+                $this->cookie->deleteCookie();
                 return LoginResult::newExpiredResult();
         }
     }
