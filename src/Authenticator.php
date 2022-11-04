@@ -100,25 +100,28 @@ class Authenticator
         }
 
         $tripletLookupResult = $this->storage->findTriplet(
-            $triplet->getCredential(),
-            $triplet->getSaltedOneTimeToken($this->salt),
-            $triplet->getSaltedPersistentToken($this->salt),
+            credential: $triplet->getCredential(),
+            token: $triplet->getSaltedOneTimeToken($this->salt),
+            persistentToken: $triplet->getSaltedPersistentToken($this->salt),
         );
+
         switch ($tripletLookupResult) {
             case Storage\AbstractStorage::TRIPLET_FOUND:
                 $expire = time() + $this->expireTime;
+
                 $newTriplet = new Triplet(
-                    $triplet->getCredential(),
-                    $this->tokenGenerator->createToken(),
-                    $triplet->getPersistentToken()
+                    credential: $triplet->getCredential(),
+                    oneTimeToken: $this->tokenGenerator->createToken(),
+                    persistentToken: $triplet->getPersistentToken()
                 );
+
                 $this->storage->replaceTriplet(
-                    $newTriplet->getCredential(),
-                    $newTriplet->getSaltedOneTimeToken($this->salt),
-                    $newTriplet->getSaltedPersistentToken($this->salt),
-                    $expire,
+                    credential: $newTriplet->getCredential(),
+                    token: $newTriplet->getSaltedOneTimeToken($this->salt),
+                    persistentToken: $newTriplet->getSaltedPersistentToken($this->salt),
+                    expire: $expire,
                 );
-                $this->cookie->setValue((string)$newTriplet);
+                $this->cookie->setValue((string) $newTriplet);
 
                 return LoginResult::newSuccessResult($triplet->getCredential());
 
@@ -147,7 +150,12 @@ class Authenticator
 
         $expire = time() + $this->expireTime;
 
-        $this->storage->storeTriplet($credential, $newToken . $this->salt, $newPersistentToken . $this->salt, $expire);
+        $this->storage->storeTriplet(
+            credential: $credential,
+            token: $newToken . $this->salt,
+            persistentToken: $newPersistentToken . $this->salt,
+            expire: $expire,
+        );
         $this->cookie->setValue(implode(Triplet::SEPARATOR, [$credential, $newToken, $newPersistentToken]));
 
         return $this;
