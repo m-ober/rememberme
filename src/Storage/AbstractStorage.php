@@ -19,6 +19,8 @@ abstract class AbstractStorage
     public const TRIPLET_NOT_FOUND = 0;
     public const TRIPLET_INVALID = -1;
 
+    public const ALLOWED_HASH_ALGOS = ['sha1', 'sha256', 'sha512', 'sha3-256', 'sha3-512'];
+
     /**
      * @var string
      */
@@ -96,7 +98,7 @@ abstract class AbstractStorage
      */
     public function setHashAlgo(string $hashAlgo): void
     {
-        if (!in_array($hashAlgo, hash_hmac_algos())) {
+        if (!in_array($hashAlgo, self::ALLOWED_HASH_ALGOS)) {
             throw new \InvalidArgumentException("Hash algorithm \"{$hashAlgo}\" is not supported.");
         }
         $this->hashAlgo = $hashAlgo;
