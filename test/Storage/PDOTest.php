@@ -1,4 +1,5 @@
 <?php
+
 /*
  */
 
@@ -11,28 +12,24 @@ use PHPUnit\Framework\TestCase;
  */
 class PDOTest extends TestCase
 {
-
     private const CREATE_DB = <<<CRDB
-CREATE TABLE "tokens" (
-	"credential"	TEXT NOT NULL,
-	"token"	TEXT NOT NULL,
-	"persistent_token"	INTEGER NOT NULL,
-	"expires"	TEXT NOT NULL,
-	PRIMARY KEY("credential","persistent_token","expires")
-) WITHOUT ROWID
-CRDB;
+        CREATE TABLE "tokens" (
+            "credential"	TEXT NOT NULL,
+            "token"	TEXT NOT NULL,
+            "persistent_token"	INTEGER NOT NULL,
+            "expires"	TEXT NOT NULL,
+            PRIMARY KEY("credential","persistent_token","expires")
+        ) WITHOUT ROWID
+    CRDB;
 
-
-  /**
-   *
-   * @var PDO
-   */
+    /**
+     * @var PDO
+     */
     protected $pdo;
 
-  /**
-   *
-   * @var mober\Rememberme\Storage\PDOStorage
-   */
+    /**
+     * @var mober\Rememberme\Storage\PDOStorage
+     */
     protected $storage;
 
     protected $userid = 'test';
@@ -40,7 +37,7 @@ CRDB;
     protected $validPersistentToken = "0e0530c1430da76495955eb06eb99d95";
     protected $invalidToken = "7ae7c7caa0c7b880cb247bb281d527de";
 
-  // SHA1 hashes of the tokens
+    // SHA1 hashes of the tokens
     protected $validDBToken = 'e0e6d29addce0fbdd0f845799be7d0395ed087c3';
     protected $validDBPersistentToken = 'd27d330764ef61e99adf5d16f90b95a2a63c209a';
     protected $invalidDBToken = 'ec15fbc40cdff6a2050a1bcbbc1b2196222f13f4';
@@ -52,14 +49,14 @@ CRDB;
     {
         $this->pdo = new PDO('sqlite::memory:');
         $this->pdo->exec(self::CREATE_DB);
-        $this->storage = new PDOStorage(array(
+        $this->storage = new PDOStorage([
             'connection' => $this->pdo,
             'tableName' => 'tokens',
             'credentialColumn' => 'credential',
             'tokenColumn' => 'token',
             'persistentTokenColumn' => 'persistent_token',
             'expiresColumn' => 'expires',
-        ));
+        ]);
     }
 
     public function testFindTripletReturnsFoundIfDataMatches()
@@ -88,7 +85,7 @@ CRDB;
         $this->storage->storeTriplet($this->userid, $this->validToken, $this->validPersistentToken, $this->expireTS);
         $result = $this->pdo->query("SELECT credential,token,persistent_token, expires FROM tokens");
         $row = $result->fetch(PDO::FETCH_NUM);
-        $this->assertEquals(array($this->userid, $this->validDBToken, $this->validDBPersistentToken, $this->expire), $row);
+        $this->assertEquals([$this->userid, $this->validDBToken, $this->validDBPersistentToken, $this->expire], $row);
         $this->assertFalse($result->fetch());
     }
 
@@ -110,6 +107,9 @@ CRDB;
 
     private function insertFixtures()
     {
-        $this->pdo->exec("INSERT INTO tokens (credential, token, persistent_token, expires) VALUES ('test', '{$this->validDBToken}', '{$this->validDBPersistentToken}', '2035-12-21 21:21:00')");
+        $this->pdo->exec(
+            "INSERT INTO tokens (credential, token, persistent_token, expires)
+            VALUES ('test', '{$this->validDBToken}', '{$this->validDBPersistentToken}', '2035-12-21 21:21:00')",
+        );
     }
 }

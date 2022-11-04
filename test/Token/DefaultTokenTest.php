@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 class DefaultTokenTest extends TestCase
 {
-
     public function testDefaultTokenReturns32CharsInHexadecimal()
     {
         $token = new DefaultToken();

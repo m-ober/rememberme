@@ -6,6 +6,7 @@
 >
     <file>src</file>
     <file>example</file>
+    <file>test</file>
     <arg name="extensions" value="php"/>
     <arg name="encoding" value="utf8"/>
     <exclude-pattern>vendor</exclude-pattern>
@@ -25,5 +26,9 @@
     <arg value="sp" />
 
     <rule ref="PSR12">
+    </rule>
+
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>test</exclude-pattern>
     </rule>
 </ruleset>

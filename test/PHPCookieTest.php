@@ -2,6 +2,7 @@
 
 // Mock PHP function
 namespace mober\Rememberme\Cookie {
+
     function setcookie($name, $value, $options)
     {
         return true;

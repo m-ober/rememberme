@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 class RandomLibTokenTest extends TestCase
 {
-
     protected function setUp(): void
     {
         if (!class_exists('RandomLib\Factory')) {

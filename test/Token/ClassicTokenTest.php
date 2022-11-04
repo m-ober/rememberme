@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 class ClassicTokenTest extends TestCase
 {
-
     /**
      * @var ClassicToken
      */
