@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author birke
  */
-class PDOTest extends TestCase
+class PDOStorageTest extends TestCase
 {
     private const CREATE_DB = <<<CRDB
         CREATE TABLE "tokens" (

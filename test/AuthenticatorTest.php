@@ -5,7 +5,7 @@ use mober\Rememberme\Storage\AbstractStorage;
 use mober\Rememberme\Triplet;
 use PHPUnit\Framework\TestCase;
 
-class RemembermeTest extends TestCase
+class AuthenticatorTest extends TestCase
 {
     /**
      * @var mober\Rememberme\Authenticator
