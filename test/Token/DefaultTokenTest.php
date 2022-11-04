@@ -26,7 +26,7 @@ class DefaultTokenTest extends TestCase
     public function testTokenLengthIncreasesWhenUsingBase64Format()
     {
         $token = new DefaultToken(32, DefaultToken::FORMAT_BASE64);
-        $this->assertMatchesRegularExpression("/^[\\da-zA-Z=+\\/]{44}$/", $token->createToken());
+        $this->assertMatchesRegularExpression("/^[\\da-zA-Z_-]{43}$/", $token->createToken());
     }
 
     public function testTokenLengthIsExactWhenUsingPlainFormat()

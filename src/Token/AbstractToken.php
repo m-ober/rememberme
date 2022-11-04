@@ -37,8 +37,13 @@ abstract class AbstractToken implements TokenInterface
     {
         return match ($this->tokenFormat) {
             self::FORMAT_HEX => bin2hex($token),
-            self::FORMAT_BASE64 => base64_encode($token),
+            self::FORMAT_BASE64 => self::urlsafeBase64Encode($token),
             default => $token,
         };
+    }
+
+    public static function urlsafeBase64Encode(string $data): string
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
 }
