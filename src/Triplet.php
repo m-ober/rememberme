@@ -39,7 +39,7 @@ class Triplet implements \Stringable
             return new Triplet();
         }
 
-        return new Triplet($parts[0], $parts[1], $parts[2]);
+        return new Triplet(credential: $parts[0], oneTimeToken: $parts[1], persistentToken: $parts[2]);
     }
 
     /**
