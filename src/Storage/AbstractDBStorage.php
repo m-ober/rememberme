@@ -49,6 +49,8 @@ abstract class AbstractDBStorage extends AbstractStorage
             $setter = "set" . ucfirst($prop);
             if (method_exists($this, $setter)) {
                 $this->$setter($value);
+            } else {
+                trigger_error("Unknown option: $prop", E_USER_WARNING);
             }
         }
     }
