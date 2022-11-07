@@ -51,6 +51,14 @@ class Authenticator
     protected bool $cleanExpiredTokensOnLogin = false;
 
     /**
+     * Token rotation can be disabled to counter spurious manipulation alerts,
+     * which can be caused not only by stolen cookies but also by, for example,
+     * bad network connections or concurrent requests.
+     * @var bool
+     */
+    protected bool $tokenRotationEnabled = true;
+
+    /**
      * Additional salt to add more entropy when the tokens are stored as hashes.
      * @var string
      */
@@ -109,11 +117,15 @@ class Authenticator
             case Storage\AbstractStorage::TRIPLET_FOUND:
                 $expire = time() + $this->expireTime;
 
-                $newTriplet = new Triplet(
-                    credential: $triplet->getCredential(),
-                    oneTimeToken: $this->tokenGenerator->createToken(),
-                    persistentToken: $triplet->getPersistentToken()
-                );
+                if ($this->tokenRotationEnabled) {
+                    $newTriplet = new Triplet(
+                        credential: $triplet->getCredential(),
+                        oneTimeToken: $this->tokenGenerator->createToken(),
+                        persistentToken: $triplet->getPersistentToken()
+                    );
+                } else {
+                    $newTriplet = $triplet;
+                }
 
                 $this->storage->replaceTriplet(
                     credential: $newTriplet->getCredential(),
@@ -278,5 +290,21 @@ class Authenticator
     public function setCleanExpiredTokensOnLogin(bool $cleanExpiredTokensOnLogin): void
     {
         $this->cleanExpiredTokensOnLogin = $cleanExpiredTokensOnLogin;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTokenRotationEnabled(): bool
+    {
+        return $this->tokenRotationEnabled;
+    }
+
+    /**
+     * @param bool $tokenRotationEnabled
+     */
+    public function setTokenRotationEnabled(bool $tokenRotationEnabled): void
+    {
+        $this->tokenRotationEnabled = $tokenRotationEnabled;
     }
 }
