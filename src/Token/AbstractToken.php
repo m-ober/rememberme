@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace mober\Rememberme\Token;
 
+use Base64Url\Base64Url;
+
 /**
  * Common utility class for tokens
  * It can output tokens in different lengths and formats - raw bytes, hexadecimal and base64
@@ -37,13 +39,8 @@ abstract class AbstractToken implements TokenInterface
     {
         return match ($this->tokenFormat) {
             self::FORMAT_HEX => bin2hex($token),
-            self::FORMAT_BASE64 => self::urlsafeBase64Encode($token),
+            self::FORMAT_BASE64 => Base64Url::encode($token),
             default => $token,
         };
-    }
-
-    public static function urlsafeBase64Encode(string $data): string
-    {
-        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
 }
