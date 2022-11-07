@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class TripletTest extends TestCase
 {
-    public const VALID_CREDENTIAL = 'user@example.org';
+    public const VALID_CREDENTIAL = 'user@example';
     public const VALID_TOKEN = '6021839c4c083b02d90c05b992ef6a509145f084';
     public const VALID_PERSISTENT_TOKEN = 'd7ebd0fc1557c6fa14c8c83d8f7764ea91bcb7d0';
 

@@ -13,7 +13,7 @@ namespace mober\Rememberme;
  */
 class Triplet implements \Stringable
 {
-    public const SEPARATOR = '|';
+    public const SEPARATOR = '.';
 
     /**
      * @param mixed $credential
