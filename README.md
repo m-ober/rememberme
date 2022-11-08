@@ -58,6 +58,24 @@ To understand the basic application structure, have a look at `index.php` and th
 The example uses the file system to store the tokens on the server side. In most
 cases it's better to swap the storage with the `PDOStorage` class.
 
+## Database configuration
+In order to use a database as storage, you need to provide an instance of `PDOStorage`:
+
+```php
+$storage = new PDOStorage([
+    'TableName'             => 'tokens',
+    'CredentialColumn'      => 'credential',
+    'TokenColumn'           => 'token',
+    'PersistentTokenColumn' => 'persistent_token',
+    'ExpiresColumn'         => 'expires',
+    'Connection'            => /* supply your instance of PDO here */,
+]);
+
+$auth = new Authenticator(storage: $storage);
+```
+
+See the directory `resources/sql` for examples on how to create the schema.
+
 ## Cookie configuration
 By default the cookie is valid for one week and for all paths in the domain it was set. 
 It cannot be accessed/changed via JavaScript and will be transmitted on HTTP connections.
@@ -66,9 +84,20 @@ HTTPS and want to enhance security by only allowing transmission of the cookie o
 the secure connection), you can create your own PHPCookie instance:
 
 ```php
-$expire = strtotime("1 week", 0);
-$cookie = new PHPCookie("REMEMBERME", $expire, "/", "", true, true);
-$auth = new Authenticator($storage, null, $cookie);
+$expire = strtotime('1 week', 0);
+
+$cookie = new PHPCookie(
+    name: 'REMEMBERME',
+    expireTime: $expire,
+    path: '/',
+    domain: 'example.org',
+    secure: true,
+    httpOnly: true,
+    sameSite: 'Lax',
+);
+
+$auth = new Authenticator(cookie: $cookie);
+$auth->setExpireTime($cookie->getExpireTime());
 ```
 
 ## Token security
