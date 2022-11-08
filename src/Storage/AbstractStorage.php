@@ -24,7 +24,7 @@ abstract class AbstractStorage
     /**
      * @var string
      */
-    protected string $hashAlgo = 'sha1';
+    protected string $hashAlgo = 'sha256';
 
     /**
      * Return Tri-state value constant
