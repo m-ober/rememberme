@@ -1,7 +1,10 @@
 <?php
 
+use mober\Rememberme\Authenticator;
 use mober\Rememberme\Cookie\CookieInterface;
 use mober\Rememberme\Storage\AbstractStorage;
+use mober\Rememberme\Token\AbstractToken;
+use mober\Rememberme\Token\DefaultToken;
 use mober\Rememberme\Triplet;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +33,10 @@ class AuthenticatorTest extends TestCase
     protected function setUp(): void
     {
         $this->storage = $this->getMockBuilder(AbstractStorage::class)->getMock();
-        $this->rememberme = new mober\Rememberme\Authenticator($this->storage);
+        $this->rememberme = new Authenticator(
+            storage: $this->storage,
+            tokenGenerator: new DefaultToken(tokenBytes: 16, tokenFormat: AbstractToken::FORMAT_HEX),
+        );
 
         $this->cookie = $this->getMockBuilder(CookieInterface::class)
             ->setMethods(["setValue", "getValue", "deleteCookie"])

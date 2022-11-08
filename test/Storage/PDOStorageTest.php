@@ -56,6 +56,7 @@ class PDOStorageTest extends TestCase
             'tokenColumn' => 'token',
             'persistentTokenColumn' => 'persistent_token',
             'expiresColumn' => 'expires',
+            'hashAlgo' => 'sha1',
         ]);
     }
 
