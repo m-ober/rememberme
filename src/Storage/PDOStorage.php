@@ -6,6 +6,7 @@
 
 namespace mober\Rememberme\Storage;
 
+use Closure;
 use PDO;
 use PDOException;
 
@@ -22,6 +23,11 @@ class PDOStorage extends AbstractDBStorage
     protected $connection;
 
     /**
+     * @var Closure|null
+     */
+    protected $credentialVerifier = null;
+
+    /**
      * @param mixed  $credential
      * @param string $token
      * @param string $persistentToken
@@ -30,6 +36,10 @@ class PDOStorage extends AbstractDBStorage
      */
     public function findTriplet($credential, $token, $persistentToken)
     {
+        if (!is_null($this->credentialVerifier) && ($this->credentialVerifier)($credential) === false) {
+            return self::TRIPLET_NOT_FOUND;
+        }
+
         $sql = "SELECT $this->tokenColumn as token FROM {$this->tableName} WHERE {$this->credentialColumn} = ? ".
             "AND {$this->persistentTokenColumn} = ? AND {$this->expiresColumn} > ? LIMIT 1";
 
@@ -141,5 +151,21 @@ class PDOStorage extends AbstractDBStorage
     public function setConnection(PDO $connection)
     {
         $this->connection = $connection;
+    }
+
+    /**
+     * @return Closure|null
+     */
+    public function getCredentialVerifier(): ?Closure
+    {
+        return $this->credentialVerifier;
+    }
+
+    /**
+     * @param Closure|null $credentialVerifier
+     */
+    public function setCredentialVerifier(?Closure $credentialVerifier): void
+    {
+        $this->credentialVerifier = $credentialVerifier;
     }
 }
