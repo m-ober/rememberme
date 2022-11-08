@@ -72,14 +72,14 @@ $auth = new Authenticator($storage, null, $cookie);
 ```
 
 ## Token security
-This library uses the [`random_bytes`][2] function by default to generate a 16-byte token 
-(a 32 char hexadecimal string). That should be sufficiently secure for most applications.
+This library uses the [`random_bytes`][2] function by default to generate a 32-byte token.
+That should be sufficiently secure for most applications.
 
 If you need more security, instantiate the `Authenticator` class with a custom token generator.
-The following example generates Base64-encoded tokens with 128 characters:
+The following example generates Base64-encoded tokens with 64 bytes:
  
  ```php
- $tokenGenerator = new DefaultToken(94, DefaultToken::FORMAT_BASE64);
+ $tokenGenerator = new DefaultToken(64, DefaultToken::FORMAT_BASE64);
  $auth = new Authenticator($storage, $tokenGenerator);
  ```
  
