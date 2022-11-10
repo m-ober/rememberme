@@ -27,7 +27,7 @@ class PDOStorage extends AbstractDBStorage
     /**
      * @var Closure|null
      */
-    protected $credentialVerifier = null;
+    protected ?Closure $credentialVerifier = null;
 
     /**
      * @param mixed  $credential
