@@ -19,7 +19,7 @@
         "psr-4": {"mober\\Rememberme\\": "src/"}
     },
     "require": {
-		"php": "7.3 - 8.0"
+        "php": "7.3 - 8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
