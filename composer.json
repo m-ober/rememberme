@@ -36,5 +36,8 @@
         "test": "phpunit",
         "cs": "phpcs -p -s",
         "ci": ["@test", "@cs"]
+    },
+    "replace": {
+        "birke/rememberme":"4.0.*"
     }
 }
