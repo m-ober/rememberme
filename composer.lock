@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45208a088c3cc351a990dad659945f06",
+    "content-hash": "8a4391d3d4301d04fbbb2f77c14f76cf",
     "packages": [
         {
             "name": "spomky-labs/base64url",
@@ -3834,7 +3834,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.0 - 8.1"
+        "php": "8.0 - 8.3"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

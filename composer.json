@@ -19,7 +19,7 @@
         "psr-4": {"mober\\Rememberme\\": "src/"}
     },
     "require": {
-        "php": "8.0 - 8.2",
+        "php": "8.0 - 8.3",
         "spomky-labs/base64url": "^2.0"
     },
     "require-dev": {
