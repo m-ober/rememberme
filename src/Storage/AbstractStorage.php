@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace mober\Rememberme\Storage;
 
+use SensitiveParameter;
+
 /**
  * This abstract class is for storing the credential/token/persistentToken triplets
  * IMPORTANT SECURITY NOTICE: The storage should not store the token values in the clear.
@@ -33,7 +35,11 @@ abstract class AbstractStorage
      * @param string $persistentToken Persistent Token
      * @return int
      */
-    abstract public function findTriplet(mixed $credential, string $token, string $persistentToken): int;
+    abstract public function findTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+    ): int;
 
     /**
      * Store the new token for the credential and the persistent token.
@@ -44,7 +50,12 @@ abstract class AbstractStorage
      * @param string $persistentToken
      * @param int $expire Timestamp when this triplet will expire
      */
-    abstract public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void;
+    abstract public function storeTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+        int $expire,
+    ): void;
 
     /**
      * Replace current token after successful authentication
@@ -55,8 +66,8 @@ abstract class AbstractStorage
      */
     abstract public function replaceTriplet(
         mixed $credential,
-        string $token,
-        string $persistentToken,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
         int $expire,
     ): void;
 
@@ -67,7 +78,7 @@ abstract class AbstractStorage
      * @param string $persistentToken
      * @return void
      */
-    abstract public function cleanTriplet(mixed $credential, string $persistentToken): void;
+    abstract public function cleanTriplet(mixed $credential, #[SensitiveParameter] string $persistentToken): void;
 
     /**
      * Remove all triplets of a user, effectively logging him out on all machines
@@ -108,7 +119,7 @@ abstract class AbstractStorage
      * @param string $value
      * @return string
      */
-    protected function hash(string $value): string
+    protected function hash(#[SensitiveParameter] string $value): string
     {
         return hash($this->hashAlgo, $value);
     }

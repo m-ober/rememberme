@@ -11,6 +11,7 @@ namespace mober\Rememberme\Storage;
 use Closure;
 use PDO;
 use PDOException;
+use SensitiveParameter;
 
 /**
  * Store login tokens in database with PDO class
@@ -35,7 +36,11 @@ class PDOStorage extends AbstractDBStorage
      * @param string $persistentToken
      * @return int
      */
-    public function findTriplet(mixed $credential, string $token, string $persistentToken): int
+    public function findTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+    ): int
     {
         if (!is_null($this->credentialVerifier) && ($this->credentialVerifier)($credential) === false) {
             return self::TRIPLET_NOT_FOUND;
@@ -66,7 +71,12 @@ class PDOStorage extends AbstractDBStorage
      * @param string $persistentToken
      * @param int $expire
      */
-    public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
+    public function storeTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+        int $expire,
+    ): void
     {
         $sql = "INSERT INTO {$this->tableName}({$this->credentialColumn}, " .
             "{$this->tokenColumn}, {$this->persistentTokenColumn}, " .
@@ -82,7 +92,7 @@ class PDOStorage extends AbstractDBStorage
      * @param mixed $credential
      * @param string $persistentToken
      */
-    public function cleanTriplet(mixed $credential, string $persistentToken): void
+    public function cleanTriplet(mixed $credential, #[SensitiveParameter] string $persistentToken): void
     {
         $sql = "DELETE FROM {$this->tableName} WHERE {$this->credentialColumn} = ? " .
             "AND {$this->persistentTokenColumn} = ?";
@@ -99,7 +109,12 @@ class PDOStorage extends AbstractDBStorage
      * @param int $expire
      * @throws PDOException
      */
-    public function replaceTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
+    public function replaceTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+        int $expire,
+    ): void
     {
         try {
             $this->connection->beginTransaction();

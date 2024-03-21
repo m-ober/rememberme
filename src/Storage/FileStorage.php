@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace mober\Rememberme\Storage;
 
+use SensitiveParameter;
+
 /**
  * File-Based Storage
  */
@@ -27,7 +29,11 @@ class FileStorage extends AbstractStorage
      * @param string $persistentToken
      * @return int
      */
-    public function findTriplet(mixed $credential, string $token, string $persistentToken): int
+    public function findTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+    ): int
     {
         // Hash the tokens, because they can contain a salt and can be accessed in the file system
         $persistentToken = $this->hash($persistentToken);
@@ -53,7 +59,12 @@ class FileStorage extends AbstractStorage
      * @param string $persistentToken
      * @param int $expire
      */
-    public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
+    public function storeTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+        int $expire,
+    ): void
     {
         // Hash the tokens, because they can contain a salt and can be accessed in the file system
         $persistentToken = $this->hash($persistentToken);
@@ -66,7 +77,7 @@ class FileStorage extends AbstractStorage
      * @param mixed $credential
      * @param string $persistentToken
      */
-    public function cleanTriplet(mixed $credential, string $persistentToken): void
+    public function cleanTriplet(mixed $credential, #[SensitiveParameter] string $persistentToken): void
     {
         $persistentToken = $this->hash($persistentToken);
         $fn = $this->getFilename($credential, $persistentToken);
@@ -83,7 +94,12 @@ class FileStorage extends AbstractStorage
      * @param string $persistentToken
      * @param int $expire
      */
-    public function replaceTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
+    public function replaceTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+        int $expire,
+    ): void
     {
         $this->cleanTriplet($credential, $persistentToken);
         $this->storeTriplet($credential, $token, $persistentToken, $expire);

@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace mober\Rememberme\Storage;
 
+use SensitiveParameter;
+
 /**
  * Redis-Based Storage
  * @author Michaël Thieulin
@@ -30,7 +32,11 @@ class RedisStorage extends AbstractStorage
      * @param string $persistentToken
      * @return int
      */
-    public function findTriplet(mixed $credential, string $token, string $persistentToken): int
+    public function findTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+    ): int
     {
         // Hash the tokens, because they can contain a salt and can be accessed in redis
         $persistentToken = $this->hash($persistentToken);
@@ -56,7 +62,12 @@ class RedisStorage extends AbstractStorage
      * @param string $persistentToken
      * @param int $expire
      */
-    public function storeTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
+    public function storeTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+        int $expire,
+    ): void
     {
         // Hash the tokens, because they can contain a salt and can be accessed in redis
         $persistentToken = $this->hash($persistentToken);
@@ -76,7 +87,12 @@ class RedisStorage extends AbstractStorage
      * @param string $persistentToken
      * @param int $expire
      */
-    public function replaceTriplet(mixed $credential, string $token, string $persistentToken, int $expire): void
+    public function replaceTriplet(
+        mixed $credential,
+        #[SensitiveParameter] string $token,
+        #[SensitiveParameter] string $persistentToken,
+        int $expire,
+    ): void
     {
         $this->cleanTriplet($credential, $persistentToken);
         $this->storeTriplet($credential, $token, $persistentToken, $expire);
@@ -86,7 +102,7 @@ class RedisStorage extends AbstractStorage
      * @param mixed $credential
      * @param string $persistentToken
      */
-    public function cleanTriplet(mixed $credential, string $persistentToken): void
+    public function cleanTriplet(mixed $credential, #[SensitiveParameter] string $persistentToken): void
     {
         $persistentToken = $this->hash($persistentToken);
         $key = $this->getKeyname($credential, $persistentToken);
@@ -121,7 +137,7 @@ class RedisStorage extends AbstractStorage
      * @param string $persistentToken
      * @return string
      */
-    protected function getKeyname(string $credential, string $persistentToken): string
+    protected function getKeyname(string $credential, #[SensitiveParameter] string $persistentToken): string
     {
         return $this->keyPrefix . ':' . $credential . ':' . $persistentToken;
     }
