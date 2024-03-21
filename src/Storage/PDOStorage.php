@@ -40,8 +40,7 @@ class PDOStorage extends AbstractDBStorage
         mixed $credential,
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
-    ): int
-    {
+    ): int {
         if (!is_null($this->credentialVerifier) && ($this->credentialVerifier)($credential) === false) {
             return self::TRIPLET_NOT_FOUND;
         }
@@ -76,8 +75,7 @@ class PDOStorage extends AbstractDBStorage
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
         int $expire,
-    ): void
-    {
+    ): void {
         $sql = "INSERT INTO {$this->tableName}({$this->credentialColumn}, " .
             "{$this->tokenColumn}, {$this->persistentTokenColumn}, " .
             "{$this->expiresColumn}) VALUES(?, ?, ?, ?)";
@@ -114,8 +112,7 @@ class PDOStorage extends AbstractDBStorage
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
         int $expire,
-    ): void
-    {
+    ): void {
         try {
             $this->connection->beginTransaction();
             $this->cleanTriplet($credential, $persistentToken);

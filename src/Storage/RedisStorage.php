@@ -36,8 +36,7 @@ class RedisStorage extends AbstractStorage
         mixed $credential,
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
-    ): int
-    {
+    ): int {
         // Hash the tokens, because they can contain a salt and can be accessed in redis
         $persistentToken = $this->hash($persistentToken);
         $token = $this->hash($token);
@@ -67,8 +66,7 @@ class RedisStorage extends AbstractStorage
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
         int $expire,
-    ): void
-    {
+    ): void {
         // Hash the tokens, because they can contain a salt and can be accessed in redis
         $persistentToken = $this->hash($persistentToken);
         $token = $this->hash($token);
@@ -92,8 +90,7 @@ class RedisStorage extends AbstractStorage
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
         int $expire,
-    ): void
-    {
+    ): void {
         $this->cleanTriplet($credential, $persistentToken);
         $this->storeTriplet($credential, $token, $persistentToken, $expire);
     }

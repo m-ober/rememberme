@@ -33,8 +33,7 @@ class FileStorage extends AbstractStorage
         mixed $credential,
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
-    ): int
-    {
+    ): int {
         // Hash the tokens, because they can contain a salt and can be accessed in the file system
         $persistentToken = $this->hash($persistentToken);
         $token = $this->hash($token);
@@ -64,8 +63,7 @@ class FileStorage extends AbstractStorage
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
         int $expire,
-    ): void
-    {
+    ): void {
         // Hash the tokens, because they can contain a salt and can be accessed in the file system
         $persistentToken = $this->hash($persistentToken);
         $token = $this->hash($token);
@@ -99,8 +97,7 @@ class FileStorage extends AbstractStorage
         #[SensitiveParameter] string $token,
         #[SensitiveParameter] string $persistentToken,
         int $expire,
-    ): void
-    {
+    ): void {
         $this->cleanTriplet($credential, $persistentToken);
         $this->storeTriplet($credential, $token, $persistentToken, $expire);
     }
