@@ -71,8 +71,8 @@ class Authenticator
      */
     public function __construct(
         protected Storage\AbstractStorage $storage,
-        TokenInterface $tokenGenerator = null,
-        Cookie\CookieInterface $cookie = null,
+        ?TokenInterface $tokenGenerator = null,
+        ?Cookie\CookieInterface $cookie = null,
     ) {
         if (is_null($tokenGenerator)) {
             $tokenGenerator = new DefaultToken();
