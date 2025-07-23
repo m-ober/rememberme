@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.13.0@70cdf647255a1362b426bb0f522a85817b8c791c">
+  <file src="src/Authenticator.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[Authenticator]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[Authenticator]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Cookie/PHPCookie.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[PHPCookie]]></code>
+    </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function deleteCookie(): void]]></code>
+      <code><![CDATA[public function getValue(): string]]></code>
+      <code><![CDATA[public function setValue(string $value): void]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getDomain]]></code>
+      <code><![CDATA[getExpireTime]]></code>
+      <code><![CDATA[getHttpOnly]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getPath]]></code>
+      <code><![CDATA[getSameSite]]></code>
+      <code><![CDATA[getSecure]]></code>
+      <code><![CDATA[setDomain]]></code>
+      <code><![CDATA[setExpireTime]]></code>
+      <code><![CDATA[setHttpOnly]]></code>
+      <code><![CDATA[setName]]></code>
+      <code><![CDATA[setPath]]></code>
+      <code><![CDATA[setSecure]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/LoginResult.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[LoginResult]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[cookieExists]]></code>
+      <code><![CDATA[getCredential]]></code>
+      <code><![CDATA[hasPossibleManipulation]]></code>
+      <code><![CDATA[isExpired]]></code>
+      <code><![CDATA[isSuccess]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Storage/AbstractDBStorage.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[getCredentialColumn]]></code>
+      <code><![CDATA[getExpiresColumn]]></code>
+      <code><![CDATA[getPersistentTokenColumn]]></code>
+      <code><![CDATA[getTableName]]></code>
+      <code><![CDATA[getTokenColumn]]></code>
+      <code><![CDATA[setCredentialColumn]]></code>
+      <code><![CDATA[setExpiresColumn]]></code>
+      <code><![CDATA[setPersistentTokenColumn]]></code>
+      <code><![CDATA[setTableName]]></code>
+      <code><![CDATA[setTokenColumn]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Storage/AbstractStorage.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getHashAlgo]]></code>
+      <code><![CDATA[setHashAlgo]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Storage/FileStorage.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[FileStorage]]></code>
+    </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function cleanAllTriplets(mixed $credential): void]]></code>
+      <code><![CDATA[public function cleanExpiredTokens(int $expiryTime): void]]></code>
+      <code><![CDATA[public function cleanTriplet(mixed $credential, #[SensitiveParameter] string $persistentToken): void]]></code>
+      <code><![CDATA[public function findTriplet(]]></code>
+      <code><![CDATA[public function replaceTriplet(]]></code>
+      <code><![CDATA[public function storeTriplet(]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyFalseArgument>
+      <code><![CDATA[file_get_contents($fn)]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseIterator>
+      <code><![CDATA[glob($this->path . DIRECTORY_SEPARATOR . "*" . $this->suffix)]]></code>
+      <code><![CDATA[glob($this->path . DIRECTORY_SEPARATOR . $credential . ".*" . $this->suffix)]]></code>
+    </PossiblyFalseIterator>
+    <UnusedClass>
+      <code><![CDATA[FileStorage]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Storage/PDOStorage.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[PDOStorage]]></code>
+    </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function cleanAllTriplets(mixed $credential): void]]></code>
+      <code><![CDATA[public function cleanExpiredTokens(int $expiryTime): void]]></code>
+      <code><![CDATA[public function cleanTriplet(mixed $credential, #[SensitiveParameter] string $persistentToken): void]]></code>
+      <code><![CDATA[public function findTriplet(]]></code>
+      <code><![CDATA[public function replaceTriplet(]]></code>
+      <code><![CDATA[public function storeTriplet(]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[PDOStorage]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Storage/RedisStorage.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[RedisStorage]]></code>
+    </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function cleanAllTriplets(mixed $credential): void]]></code>
+      <code><![CDATA[public function cleanExpiredTokens(int $expiryTime): void]]></code>
+      <code><![CDATA[public function cleanTriplet(mixed $credential, #[SensitiveParameter] string $persistentToken): void]]></code>
+      <code><![CDATA[public function findTriplet(]]></code>
+      <code><![CDATA[public function replaceTriplet(]]></code>
+      <code><![CDATA[public function storeTriplet(]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[RedisStorage]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Token/DefaultToken.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[DefaultToken]]></code>
+    </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function createToken(): string]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Token/RandomLibToken.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[RandomLibToken]]></code>
+    </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function createToken(): string]]></code>
+    </MissingOverrideAttribute>
+    <UnusedClass>
+      <code><![CDATA[RandomLibToken]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Triplet.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[Triplet]]></code>
+    </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function __toString(): string]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyNullArgument>
+      <code><![CDATA[$oneTimeToken]]></code>
+    </PossiblyNullArgument>
+  </file>
+</files>
